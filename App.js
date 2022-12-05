@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { Registrar } from './app/screens/LoginScreen/RegistrarUsuario';
 import { ReseteoForm } from './app/screens/LoginScreen/ReseteoCorreoScreen';
 import { Pedidos } from './app/screens/PedidosScreen'
-
+import { ListaPedidosFinal } from './app/screens/ClienteScreen/PedidosScreen';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ContenidoA } from "./app/screens/ContenidoA";
 import { Contenidob } from "./app/screens/ContenidoB";
@@ -24,6 +24,19 @@ const LoginStack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+
+const ClientesTab=()=>{
+return <Tab.Navigator>
+  <Tab.Screen
+        name="TabListaPedidos"
+        component={ListaPedidosFinal}
+        options={{
+          title: "Pedidos"
+        }}
+      />
+</Tab.Navigator>
+
+}
 
 const TabNav = () => {
   return (
@@ -157,7 +170,7 @@ export default function App() {
 
 
     <NavigationContainer>
-      {Login ? <TabNav /> : <LoginNav />}
+      {Login ? <ClientesTab /> : <LoginNav />}
 
     </NavigationContainer>
   );

@@ -10,6 +10,7 @@ const styles=StyleSheet.create({
     },
     title:{
         fontSize:theme.fontSize.title,
+        
     },
     bold:{
         fontWeight:theme.fontWeight.bold

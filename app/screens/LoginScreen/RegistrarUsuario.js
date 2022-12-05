@@ -3,6 +3,9 @@ import { useState } from "react"
 import { View, StyleSheet, Text } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
 import { TextInput } from 'react-native-paper';
+import { Image } from '@rneui/themed';
+import { guardarUSuario } from "../../Services/Usuarios";
+import theme from '../../theme/theme'
 export const Registrar = ({ navigation }) => {
 
     const [usuario, setUsuario] = useState();
@@ -15,7 +18,14 @@ export const Registrar = ({ navigation }) => {
 
     const crearUsuario = () => {
         CrearUsuario(usuario, clave);
-        navigation.navigate("LoginNav")
+        guardarUSuario({
+            usuario:usuario,
+            cedula:cedula,
+            correo:correo,
+            clave:clave
+        });
+        navigation.navigate("LoginNav");
+
     }
 
 
@@ -23,7 +33,8 @@ export const Registrar = ({ navigation }) => {
     return <View style={styles.container}>
 
         <View style={styles.cajaCabecera} >
-            <Text>Registrar</Text>
+        <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
+            <Text style={{fontSize:theme.fontSize.title}}>Registrar Usuario</Text>
         </View>
         <View style={styles.cajaCuerpo} >
             <TextInput
@@ -120,11 +131,14 @@ export const Registrar = ({ navigation }) => {
 
 
         <View style={styles.cajaBotones}>
-            <Button
+        <Button
                 title='Crear Usuario'
                 onPress={crearUsuario}
-
-
+                buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
+                containerStyle={{
+                    width: 200,
+                    paddingTop: 40
+                }}
             />
         </View>
 
@@ -152,7 +166,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 100
+        padding: 100,
+        marginBottom:50
     },
     cajaCuerpo: {
         //backgroundColor: 'brown',
