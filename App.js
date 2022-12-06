@@ -18,6 +18,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ContenidoA } from "./app/screens/ContenidoA";
 import { Contenidob } from "./app/screens/ContenidoB";
 import { Icon } from '@rneui/base';
+import { ArmarPedido } from './app/screens/ClienteScreen/ArmarPedido';
+import PedidosContext from './app/context/PedidosContext'
+import { ResumenPedido } from './app/screens/ClienteScreen/ResumenPedido';
 
 const Stack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
@@ -25,18 +28,56 @@ const LoginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const ClientesTab=()=>{
-return <Tab.Navigator>
-  <Tab.Screen
-        name="TabListaPedidos"
-        component={ListaPedidosFinal}
-        options={{
-          title: "Pedidos"
-        }}
-      />
-</Tab.Navigator>
+const ClientesTab = () => {
+  return <Stack.Navigator>
+    <Stack.Screen
+      name="TabListaPedidos"
+      component={ListaPedidosFinal}
+      options={{
+        title: "Pedidos"
+      }}
+    />
+    <Stack.Screen
+      name="TabArmarPedido"
+      component={ArmarPedidoTab}
+      options={{
+        title: "Pedidos"
+      }}
+    />
+
+  </Stack.Navigator>
+
+
+
 
 }
+
+const ArmarPedidoTab = () => {
+  return <Tab.Navigator>
+    <Tab.Screen
+      name="TabArmarPedido1"
+      component={ArmarPedido}
+      options={{
+        title: "ArmarPedidos"
+      }}
+    />
+
+    <Tab.Screen
+      name="TabResumenPedidos"
+      component={ResumenPedido}
+      options={{
+        title: "resumenPedio"
+      }}
+    />
+
+  </Tab.Navigator>
+
+}
+
+
+
+
+
 
 const TabNav = () => {
   return (
@@ -136,7 +177,9 @@ const ProductoNav = () => {
 
 
 export default function App() {
-
+  const PedidosData = {
+    productos: []
+  }
   const [Login, setlogin] = useState(false);
   const registarObserver = () => {
     const auth = getAuth();
@@ -171,7 +214,7 @@ export default function App() {
 
     <NavigationContainer>
       {Login ? <ClientesTab /> : <LoginNav />}
-
     </NavigationContainer>
+
   );
 }
