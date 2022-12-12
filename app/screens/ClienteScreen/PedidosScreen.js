@@ -5,8 +5,13 @@ import { consultar } from "../../Services/ProductosSrv"
 import { useEffect, useState } from "react"
 import { cerrarSesion } from "../../Services/AutenticacionSrv";
 import theme from "../../theme/theme";
+import { TarjetaPedidos } from "../../Components/Pedidos"; 
 export const ListaPedidosFinal = ({ navigation }) => {
     const [pedidos, setPedidos] = useState([]);
+
+
+
+
 
     const recuperarProductos = () => {
         console.log("recupernado datos ")
@@ -14,60 +19,64 @@ export const ListaPedidosFinal = ({ navigation }) => {
         console.log("OED", pedidos);
     }
 
+
+
+
+
     useEffect(() => {
         recuperarProductos();
     }, [])
 
 
 
-    let ItemProduct = ({ prod, indice }) => {
+    // let ItemProduct = ({ prod, indice }) => {
 
-        return (
+    //     return (
 
-            <ScrollView style={styles.impar} >
-                <TouchableHighlight onPress={() => {
-                }}>
-                    <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 1 }}>
-
-
-
-                        <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 1, alignItems: 'center', alignContent: 'center', marginTop: 20 }}>
-                            <Text>{prod.codigo}</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 4 }}>
-                            <Text style={{ fontSize: 20, paddingLeft: 4, color: '#FAC028', fontWeight: 'bold' }}>{prod.nombre}</Text>
-                            <Text style={{ fontSize: 15, fontStyle: 'italic', textAlign: 'left', color: "#eeeeee" }}> ({prod.categoria})</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignContent: 'flex-end', flex: 2, alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#F7621E', fontStyle: 'italic', marginTop: 4 }}> USD</Text>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#F7621E', textDecorationStyle: 'dashed', justifyContent: 'flex-end' }}> {prod.precio}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 0.8, padding: 12 }}>
-                            <View style={{ marginRight: 1, marginLeft: 2 }}>
-
-                            </View>
-                            <View style={{ marginLeft: 10 }}>
-
-                            </View>
-
-                        </View>
+    //         <ScrollView style={styles.impar} >
+    //             <TouchableHighlight onPress={() => {
+    //             }}>
+    //                 <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 1 }}>
 
 
 
+    //                     <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 1, alignItems: 'center', alignContent: 'center', marginTop: 20 }}>
+    //                         <Text>{prod.codigo}</Text>
+    //                     </View>
 
-                    </View>
+    //                     <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 4 }}>
+    //                         <Text style={{ fontSize: 20, paddingLeft: 4, color: '#FAC028', fontWeight: 'bold' }}>{prod.nombre}</Text>
+    //                         <Text style={{ fontSize: 15, fontStyle: 'italic', textAlign: 'left', color: "#eeeeee" }}> ({prod.categoria})</Text>
+    //                     </View>
+    //                     <View style={{ flexDirection: 'row', alignContent: 'flex-end', flex: 2, alignItems: 'center' }}>
+    //                         <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#F7621E', fontStyle: 'italic', marginTop: 4 }}> USD</Text>
+    //                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#F7621E', textDecorationStyle: 'dashed', justifyContent: 'flex-end' }}> {prod.precio}</Text>
+    //                     </View>
+    //                     <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 0.8, padding: 12 }}>
+    //                         <View style={{ marginRight: 1, marginLeft: 2 }}>
 
-                </TouchableHighlight>
+    //                         </View>
+    //                         <View style={{ marginLeft: 10 }}>
 
-            </ScrollView  >
+    //                         </View>
 
-
-        );
-    }
-
+    //                     </View>
 
 
+
+
+    //                 </View>
+
+    //             </TouchableHighlight>
+
+    //         </ScrollView  >
+
+
+    //     );
+    // }
+
+
+ 
 
 
 
@@ -80,7 +89,10 @@ export const ListaPedidosFinal = ({ navigation }) => {
                 <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
         </View>
         <View style={styles.cajaCuerpo} >
-            <FlatList
+
+
+            <TarjetaPedidos  pedidos={pedidos}  />
+            {/* <FlatList
                 data={pedidos}
                 renderItem={(e) => {
 
@@ -91,7 +103,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
                 }}
                 keyExtractor={(item) => { return item.codigo }}
 
-            />
+            /> */}
         </View>
         <View style={styles.cajaBotones}>
             <Button
@@ -123,9 +135,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffff',
         alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        paddingTop: 100,
-        paddingLeft: 30
+        justifyContent: 'flex-start'
     },
     impar: {
 
@@ -209,7 +219,6 @@ const styles = StyleSheet.create({
        // backgroundColor: 'brown',
         flex:5,
         alignItems: 'stretch',
-        paddingHorizontal: 30,
         justifyContent: 'flex-start',
     },
     titulo: {

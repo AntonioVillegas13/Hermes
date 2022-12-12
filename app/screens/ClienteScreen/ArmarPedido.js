@@ -10,11 +10,11 @@ import theme from '../../theme/theme'
 global.ResumenPedido = [];
 export const ArmarPedido = ({ navigation }) => {
     
-    const [txtCod, setTxtCod] = useState("!23");
-    const [txtNomP, setTxtNomP] = useState("sfdsf");
-    const [txtCategoria, setTxtCategoria] = useState("ewrewr");
-    const [txPrecioComp, setTxtPrecioComp] = useState("vs");
-    const [txtCantidad, setTxtCantidad] = useState("erwr");
+    const [txtCod, setTxtCod] = useState("");
+    const [txtNomP, setTxtNomP] = useState("");
+    const [txtCategoria, setTxtCategoria] = useState("");
+    const [txPrecioComp, setTxtPrecioComp] = useState("");
+    const [txtCantidad, setTxtCantidad] = useState("");
 
 
     const limpiar = () => {

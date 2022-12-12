@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet, Text,FlatList,ScrollView,TouchableHighlight } from "react-native"
 
 
 export const ResumenPedido = () => {
+
+    useEffect(() => {
+        resumen
+      }, []);
+
+
+
 
     let ItemProduct = ({ prod, indice }) => {
 

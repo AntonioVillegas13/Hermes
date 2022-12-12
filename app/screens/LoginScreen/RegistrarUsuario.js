@@ -34,7 +34,7 @@ export const Registrar = ({ navigation }) => {
 
         <View style={styles.cajaCabecera} >
         <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
-            <Text style={{fontSize:theme.fontSize.title}}>Registrar Usuario</Text>
+            <Text style={{fontSize:20}}>Registrar Usuario</Text>
         </View>
         <View style={styles.cajaCuerpo} >
             <TextInput
