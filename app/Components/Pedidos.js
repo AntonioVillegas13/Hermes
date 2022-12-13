@@ -9,7 +9,14 @@ export const TarjetaPedidos = (props) => {
             <ScrollView style={styles.impar} >
                 <TouchableHighlight onPress={() => {
                 }}>
-                    <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 1 }}>
+                    <View style={{margin:10}}>
+                        <View style={styles.ViewRow}>
+                            <Text>PEDIDO #</Text>
+                            <Text>{prod.codigo}</Text>
+                        </View>
+
+                    </View>
+                    {/* <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 1 }}>
                         <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 1, alignItems: 'center', alignContent: 'center', marginTop: 20 }}>
                             <View style={{ flexDirection: 'row', alignContent: 'flex-start' }}>
                             <Text>Pedidos: </Text>
@@ -39,7 +46,7 @@ export const TarjetaPedidos = (props) => {
 
 
 
-                    </View>
+                    </View> */}
 
                 </TouchableHighlight>
 
@@ -92,6 +99,12 @@ const styles = StyleSheet.create({
 
 
     },
+    ViewRow: {
+        flexDirection: "row"
+    }
+
+
+    ,
     titulo: {
         fontSize: 30,
         fontFamily: 'sans-serif-condensed',
