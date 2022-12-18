@@ -1,29 +1,34 @@
+import { Button } from "@rneui/base";
 import { useEffect } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
-
+import { EnviarDatos  } from "../../Services/ProductosSrv";
 
 export const ResumenPedido = () => {
 
     useEffect(() => {
         resumen
         console.log((global.ResumenPedido));
-        const productos=global.ResumenPedido
-        let Total=0
+        const productos = global.ResumenPedido
+        let Total = 0
         productos.forEach(element => {
-            let subTotal=element.precio*element.cantidad
-            Total=Total+subTotal;
-            console.log("sum",subTotal)
+            let subTotal = element.precio * element.cantidad
+            Total = Total + subTotal;
+            console.log("sum", subTotal)
         });
 
-        console.log("tOTAL",Total)
+        console.log("tOTAL", Total)
 
 
     }, []);
 
-    
 
 
+    const enviarDatos=()=>{
+
+        console.log("elemento enviado")
+        EnviarDatos(resumen)
+    }
 
 
 
@@ -60,28 +65,41 @@ export const ResumenPedido = () => {
         );
     }
 
-    console.log("REsumenpedios:", global.ResumenPedido);
+    console.log("Resumenpedios:", global.ResumenPedido);
     let resumen = global.ResumenPedido;
 
     return (
+        <View >
+            <FlatList
+                data={resumen}
 
-        <FlatList
-            data={resumen}
+                renderItem={(e) => {
 
-            renderItem={(e) => {
-
-                return <ItemPedido
-                    indice={e.index}
-                    prod={e.item}
-                />
-            }}
-                
-
+                    return <ItemPedido
+                        indice={e.index}
+                        prod={e.item}
+                    />
+                }}
 
 
-            keyExtractor={item => item.id}
 
-        />
+
+                keyExtractor={item => item.codigo}
+
+            />
+
+
+
+
+
+
+            <Button
+                title='Cerrar Sesion'
+                onPress={enviarDatos}
+
+            />
+        </View>
+
     )
 
 

@@ -52,11 +52,8 @@ export const ArmarPedido = ({ navigation }) => {
 
     }
     const limpiar = () => {
-        setTxtCod("");
-        setTxtNomP("");
-        setTxtCategoria("");
-        setTxtPrecioComp("");
         setTxtCantidad("")
+        setSelectedItem(null)
     }
 
     const ArmarPed = () => {

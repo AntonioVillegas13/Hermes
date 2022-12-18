@@ -43,7 +43,16 @@ export const consultarProducto = async () => {
 
     });
 
-    global.ListaProducto=ProductosArray
+    global.ListaProducto = ProductosArray
     console.log("productoFunc", ProductosArray);
+
+}
+
+export const EnviarDatos = (pedido) => {
+    const productRef = doc(global.dbCon, "Pedidos", pedido.codigo);
+    setDoc(productRef, pedido);
+
+
+
 
 }
