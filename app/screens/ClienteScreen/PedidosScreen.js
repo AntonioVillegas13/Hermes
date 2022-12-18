@@ -5,7 +5,7 @@ import { consultar } from "../../Services/ProductosSrv"
 import { useEffect, useState } from "react"
 import { cerrarSesion } from "../../Services/AutenticacionSrv";
 import theme from "../../theme/theme";
-import { TarjetaPedidos } from "../../Components/Pedidos"; 
+import { TarjetaPedidos } from "../../Components/Pedidos";
 export const ListaPedidosFinal = ({ navigation }) => {
     const [pedidos, setPedidos] = useState([]);
 
@@ -76,7 +76,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
     // }
 
 
- 
+
 
 
 
@@ -85,13 +85,13 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
     return <View style={styles.container}>
         <View style={styles.cajaCabecera} >
-           
-                <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
+
+            <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
         </View>
         <View style={styles.cajaCuerpo} >
 
 
-            <TarjetaPedidos  pedidos={pedidos}  />
+            <TarjetaPedidos pedidos={pedidos} />
             {/* <FlatList
                 data={pedidos}
                 renderItem={(e) => {
@@ -213,11 +213,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginBottom:50
+        marginBottom: 50
     },
     cajaCuerpo: {
-       // backgroundColor: 'brown',
-        flex:5,
+        // backgroundColor: 'brown',
+        flex: 5,
         alignItems: 'stretch',
         justifyContent: 'flex-start',
     },

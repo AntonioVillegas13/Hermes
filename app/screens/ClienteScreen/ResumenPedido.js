@@ -28,12 +28,12 @@ export const ResumenPedido = () => {
                         </View>
 
                         <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 4 }}>
-                            <Text style={{ fontSize: 20, paddingLeft: 4, color: '#FAC028', fontWeight: 'bold' }}>{prod.nombre}</Text>
-                            <Text style={{ fontSize: 15, fontStyle: 'italic', textAlign: 'left', color: "#eeeeee" }}> ({prod.categoria})</Text>
+                            <Text style={{ fontSize: 20, paddingLeft: 4, color: '#FAC028', fontWeight: 'bold' }}>{prod.title}</Text>
+                            <Text style={{ fontSize: 15, fontStyle: 'italic', textAlign: 'left', color: "#eeeeee" }}> ({prod.Category})</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignContent: 'flex-end', flex: 2, alignItems: 'center' }}>
                             <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#F7621E', fontStyle: 'italic', marginTop: 4 }}> USD</Text>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#F7621E', textDecorationStyle: 'dashed', justifyContent: 'flex-end' }}> {prod.precio}</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#F7621E', textDecorationStyle: 'dashed', justifyContent: 'flex-end' }}> {prod.price}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 0.8, padding: 12 }}>
                             <View style={{ marginRight: 1, marginLeft: 2 }}>

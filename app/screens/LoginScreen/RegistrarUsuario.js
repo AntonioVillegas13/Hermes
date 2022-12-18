@@ -25,7 +25,7 @@ export const Registrar = ({ navigation }) => {
             cedula:cedula,
             correo:correo,
             clave:clave,
-            identificacion:global.userId
+            identificacion:global?.userId
         });
         navigation.navigate("LoginNav");
 
