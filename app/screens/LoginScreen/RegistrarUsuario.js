@@ -13,16 +13,19 @@ export const Registrar = ({ navigation }) => {
     const [correo, setCorreo] = useState();
     const [clave, setClave] = useState();
     const [confirmar, setConfirmar] = useState();
-
+    const [uid,setuid] =useState("");
 
 
     const crearUsuario = () => {
-        CrearUsuario(usuario, clave);
+         CrearUsuario(correo, clave);
+
+        console.log("uiID",global.userId)
         guardarUSuario({
-            usuario:usuario,
+            name:usuario,
             cedula:cedula,
             correo:correo,
-            clave:clave
+            clave:clave,
+            identificacion:global.userId
         });
         navigation.navigate("LoginNav");
 

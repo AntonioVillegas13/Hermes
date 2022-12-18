@@ -16,6 +16,7 @@ export const LoginForm = ({ navigation }) => {
     const ValidarLogin = () => {
         Alert.alert("Vlaidando")
         Ingresar(usuario, contraseña);
+        
     }
 
     return <View style={styles.container}>

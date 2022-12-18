@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { Alert } from "react-native";
-import { View, StyleSheet, Text,FlatList,ScrollView,TouchableHighlight } from "react-native"
+import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
 
 
 export const ResumenPedido = () => {
 
     useEffect(() => {
         resumen
-      }, []);
+    }, []);
 
 
 
@@ -24,7 +24,7 @@ export const ResumenPedido = () => {
 
 
                         <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 1, alignItems: 'center', alignContent: 'center', marginTop: 20 }}>
-                            <Text>{prod.codigo}</Text>
+                            <Text>{prod.id}</Text>
                         </View>
 
                         <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 4 }}>
@@ -63,20 +63,20 @@ export const ResumenPedido = () => {
     return (
 
         <FlatList
-        data={resumen}
-        renderItem={(e) => {
+            data={resumen}
+            renderItem={(e) => {
 
-            return <ItemProduct
-                indice={e.index}
-                prod={e.item}
-            />
+                return <ItemProduct
+                    indice={e.index}
+                    prod={e.item}
+                />
 
 
 
-        }}
-        keyExtractor={(item) => { return resumen.codigo }}
+            }}
+            keyExtractor={(item) => { return resumen.id }}
 
-    />
+        />
     )
 
 

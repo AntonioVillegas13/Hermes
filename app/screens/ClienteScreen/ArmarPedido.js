@@ -1,22 +1,56 @@
 import { Button, Input, Icon } from "@rneui/base"
-import { useState } from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { useEffect, useState } from "react"
+import { View, StyleSheet, Text, Dimensions } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
 import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
-import { guardarUSuario } from "../../Services/Usuarios";
+import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
+import { consultarProducto } from "../../Services/ProductosSrv";
+
 import theme from '../../theme/theme'
+import { set } from "react-native-reanimated";
 
 global.ResumenPedido = [];
 export const ArmarPedido = ({ navigation }) => {
-    
+
     const [txtCod, setTxtCod] = useState("");
     const [txtNomP, setTxtNomP] = useState("");
     const [txtCategoria, setTxtCategoria] = useState("");
     const [txPrecioComp, setTxtPrecioComp] = useState("");
     const [txtCantidad, setTxtCantidad] = useState("");
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [Productos, setProductos] = useState([])
+    const [suggestionList, setsuggestionlist] = useState([])
+
+    useEffect(() => {
+        cargarProducto();
+    }, [])
+    // useEffect(() => {
+    //     setTxtCod(selectedItem?.precio)
+    // }, [selectedItem])
 
 
+    const cargarProducto = () => {
+        consultarProducto()
+        let response = Productos
+        let lista = []
+        if (response) {
+            response.forEach(element => {
+                lista.push({ id: element.id, title: element.nombre })
+            });
+        }
+
+
+        setsuggestionlist(global.ListaProducto)
+
+
+
+        console.log("response", response)
+        console.log("Lista", lista)
+        console.log("Pr", Productos)
+        console.log("Pr2", global.ListaProducto)
+
+    }
     const limpiar = () => {
         setTxtCod("");
         setTxtNomP("");
@@ -50,11 +84,39 @@ export const ArmarPedido = ({ navigation }) => {
             <Text style={{ fontSize: theme.fontSize.title }}>Pedido</Text>
         </View>
         <View style={styles.cajaCuerpo} >
+
+            <AutocompleteDropdown
+                // clearOnFocus={false}
+                // closeOnBlur={true}
+
+                // closeOnSubmit={false}
+                initialValue={{ id: '2' }} // or just '2'
+                onSelectItem={setSelectedItem}
+                dataSet={suggestionList}
+                emptyResultText={'No existe ese producto'}
+                containerStyle={{ width: Dimensions.get("window").width - 58 }}
+                rightButtonsContainerStyle={{
+                    right: 8,
+                    height: 30,
+                    // backgroundColor:'gray',
+                    alignSelf: 'center',
+
+                }}
+                inputContainerStyle={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: 5,
+                    borderWidth: 1,
+                }}
+
+            />
+
+            {/* <Text>{selectedItem?.precio}</Text> */}
             <TextInput
-                value={txtCod}
+                value={selectedItem?.id}
                 label='Codigo'
                 onChangeText={setTxtCod}
                 keyboardType="numeric"
+                editable={false}
                 mode="outlined"
                 lefIcon={
                     <Icon
@@ -68,8 +130,10 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-                value={txtNomP}
+                value={selectedItem?.title}
                 label='Nombre'
+                editable={false}
+               
                 onChangeText={setTxtNomP}
                 KeyboardType="email-address"
                 mode="outlined"
@@ -85,9 +149,11 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-                value={txtCategoria}
+                value={selectedItem?.Category}
                 label='Categoria'
                 onChangeText={setTxtCategoria}
+                editable={false}
+
                 KeyboardType="email-address"
                 mode="outlined"
                 lefIcon={
@@ -102,8 +168,10 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-                value={txPrecioComp}
+                value={selectedItem?.price  }
                 label='Precio'
+                editable={false}
+
                 onChangeText={setTxtPrecioComp}
                 KeyboardType="email-address"
                 mode="outlined"
@@ -122,7 +190,10 @@ export const ArmarPedido = ({ navigation }) => {
             <TextInput
                 value={txtCantidad}
                 label='Cantidad'
-                onChangeText={setTxtCantidad}
+                onChangeText={(e) => {
+                    console.log("")
+                    setTxtCantidad(e)
+                }}
                 KeyboardType="email-address"
                 mode="outlined"
                 lefIcon={

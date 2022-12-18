@@ -1,32 +1,49 @@
 
 
-import {collection, doc,getDocs,setDoc,addDoc} from 'firebase/firestore'
+import { collection, doc, getDocs, setDoc, addDoc } from 'firebase/firestore'
 
 
-export const guardar=(producto)=>{
+export const guardar = (producto) => {
     console.log(global.dbCon);
-    const productRef=doc(global.dbCon,"Pedidos",producto.codigo);
-    setDoc(productRef,producto);
+    const productRef = doc(global.dbCon, "Pedidos", producto.codigo);
+    setDoc(productRef, producto);
 }
 
-export const guardar2=(producto)=>{
+export const guardar2 = (producto) => {
     console.log(global.dbCon);
-    const productRef=collection(global.dbCon,"Pedidos");
-    addDoc(productRef,producto);
+    const productRef = collection(global.dbCon, "Pedidos");
+    addDoc(productRef, producto);
 }
 
-export const consultar =async(fnsetPedidos)=>{
+export const consultar = async (fnsetPedidos) => {
     //console.log("globla",global.dbCon);
-    const productoRef=collection(global.dbCon,"Pedidos");
-    const SnapPedidos= await getDocs(productoRef);
-    let PedidoArray=[]
-    SnapPedidos.forEach((documento)=>{
-        console.log("doc",documento.data());
+    const productoRef = collection(global.dbCon, "Pedidos");
+    const SnapPedidos = await getDocs(productoRef);
+    let PedidoArray = []
+    SnapPedidos.forEach((documento) => {
+        console.log("doc", documento.data());
         PedidoArray.push(documento.data());
 
     });
 
     fnsetPedidos(PedidoArray)
-    console.log("pediFunc",PedidoArray);
+    console.log("pediFunc", PedidoArray);
+
+}
+
+
+export const consultarProducto = async () => {
+    //console.log("globla",global.dbCon);
+    const productoRef = collection(global.dbCon, "Producto");
+    const SnapProductos = await getDocs(productoRef);
+    let ProductosArray = []
+    SnapProductos.forEach((documento) => {
+        console.log("doc", documento.data());
+        ProductosArray.push(documento.data());
+
+    });
+
+    global.ListaProducto=ProductosArray
+    console.log("productoFunc", ProductosArray);
 
 }
