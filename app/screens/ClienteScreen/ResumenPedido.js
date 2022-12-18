@@ -7,56 +7,59 @@ export const ResumenPedido = () => {
 
     useEffect(() => {
         resumen
+        console.log((global.ResumenPedido));
+        const productos=global.ResumenPedido
+        let Total=0
+        productos.forEach(element => {
+            let subTotal=element.precio*element.cantidad
+            Total=Total+subTotal;
+            console.log("sum",subTotal)
+        });
+
+        console.log("tOTAL",Total)
+
+
     }, []);
 
+    
 
 
 
-    let ItemProduct = ({ prod, indice }) => {
+
+
+
+    let ItemPedido = ({ prod, indice }) => {
 
         return (
+            <View>
+                <View>
+                    <Text></Text>
 
-            <ScrollView style={styles.impar} >
-                <TouchableHighlight onPress={() => {
-                }}>
-                    <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 1 }}>
+                </View>
 
 
 
-                        <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 1, alignItems: 'center', alignContent: 'center', marginTop: 20 }}>
-                            <Text>{prod.id}</Text>
-                        </View>
 
-                        <View style={{ flexDirection: 'column', alignContent: 'flex-start', flex: 4 }}>
-                            <Text style={{ fontSize: 20, paddingLeft: 4, color: '#FAC028', fontWeight: 'bold' }}>{prod.title}</Text>
-                            <Text style={{ fontSize: 15, fontStyle: 'italic', textAlign: 'left', color: "#eeeeee" }}> ({prod.Category})</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignContent: 'flex-end', flex: 2, alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', color: '#F7621E', fontStyle: 'italic', marginTop: 4 }}> USD</Text>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#F7621E', textDecorationStyle: 'dashed', justifyContent: 'flex-end' }}> {prod.price}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignContent: 'flex-start', flex: 0.8, padding: 12 }}>
-                            <View style={{ marginRight: 1, marginLeft: 2 }}>
-
-                            </View>
-                            <View style={{ marginLeft: 10 }}>
-
+                <ScrollView style={styles.impar} >
+                    <TouchableHighlight onPress={() => {
+                    }}>
+                        <View style={{ margin: 10 }}>
+                            <View style={styles.ViewRow}>
+                                <Text>PEDIDO #</Text>
+                                <Text>{prod.nombre}</Text>
                             </View>
 
                         </View>
 
 
+                    </TouchableHighlight>
 
-
-                    </View>
-
-                </TouchableHighlight>
-
-            </ScrollView  >
-
+                </ScrollView  >
+            </View>
 
         );
     }
+
     console.log("REsumenpedios:", global.ResumenPedido);
     let resumen = global.ResumenPedido;
 
@@ -64,17 +67,19 @@ export const ResumenPedido = () => {
 
         <FlatList
             data={resumen}
+
             renderItem={(e) => {
 
-                return <ItemProduct
+                return <ItemPedido
                     indice={e.index}
                     prod={e.item}
                 />
-
-
-
             }}
-            keyExtractor={(item) => { return resumen.id }}
+                
+
+
+
+            keyExtractor={item => item.id}
 
         />
     )

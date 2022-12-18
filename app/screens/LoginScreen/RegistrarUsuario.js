@@ -13,19 +13,19 @@ export const Registrar = ({ navigation }) => {
     const [correo, setCorreo] = useState();
     const [clave, setClave] = useState();
     const [confirmar, setConfirmar] = useState();
-    const [uid,setuid] =useState("");
+    const [uid, setuid] = useState("");
 
 
     const crearUsuario = () => {
-         CrearUsuario(correo, clave);
+        CrearUsuario(correo, clave);
 
-        console.log("uiID",global.userId)
+        console.log("uiID", global.userId)
         guardarUSuario({
-            name:usuario,
-            cedula:cedula,
-            correo:correo,
-            clave:clave,
-            identificacion:global?.userId
+            name: usuario,
+            cedula: cedula,
+            correo: correo,
+            clave: clave,
+            identificacion: global.userId
         });
         navigation.navigate("LoginNav");
 
@@ -36,8 +36,8 @@ export const Registrar = ({ navigation }) => {
     return <View style={styles.container}>
 
         <View style={styles.cajaCabecera} >
-        <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
-            <Text style={{fontSize:20}}>Registrar Usuario</Text>
+            <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
+            <Text style={{ fontSize: 20 }}>Registrar Usuario</Text>
         </View>
         <View style={styles.cajaCuerpo} >
             <TextInput
@@ -134,7 +134,7 @@ export const Registrar = ({ navigation }) => {
 
 
         <View style={styles.cajaBotones}>
-        <Button
+            <Button
                 title='Crear Usuario'
                 onPress={crearUsuario}
                 buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         padding: 100,
-        marginBottom:50
+        marginBottom: 50
     },
     cajaCuerpo: {
         //backgroundColor: 'brown',

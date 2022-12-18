@@ -61,10 +61,10 @@ export const ArmarPedido = ({ navigation }) => {
 
     const ArmarPed = () => {
         let ProductoAux = {
-            codigo: txtCod,
-            nombre: txtNomP,
-            categoria: txtCategoria,
-            precio: txPrecioComp,
+            codigo: selectedItem?.id,
+            nombre: selectedItem?.title,
+            categoria: selectedItem?.Category,
+            precio: selectedItem?.price,
             cantidad: txtCantidad
         }
 
