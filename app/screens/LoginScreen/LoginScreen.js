@@ -7,16 +7,41 @@ import { cerrarSesion } from "../../Services/AutenticacionSrv";
 import { Ingresar } from "../../Services/AutenticacionSrv";
 import { Image, Input } from '@rneui/themed';
 import StyledText from '../../theme/StyledText';
-import { TextInput } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import theme from '../../theme/theme'
+import { validateEmail } from "../../commons/validations";
 export const LoginForm = ({ navigation }) => {
     const [usuario, setUsuario] = useState();
     const [contraseña, setcontraseña] = useState();
+    const [errorCorreo, setErrorCorreo] = useState();
+    const [errorPassword, setErrorPassword] = useState();
+    let hasErrors = false;
+    const validate = () => {
+        if (usuario == null || usuario == "") {
+            setErrorCorreo("Debe ingresar su correo");
+            hasErrors = true;
+        } else if (!validateEmail(usuario)) {
+            setErrorCorreo("Debe ingresar un correo valido");
+            hasErrors = true;
+        }
+
+        if (contraseña == null || contraseña == "") {
+            setErrorPassword("Debe ingresar su contraseña");
+            hasErrors = true;
+        }
+    };
+
+
 
     const ValidarLogin = () => {
-        Alert.alert("Vlaidando")
+        hasErrors = false;
+        validate();
+        if (hasErrors) {
+            return;
+          }
+        // Alert.alert("Vlaidando")
         Ingresar(usuario, contraseña);
-        
+
     }
 
     return <View style={styles.container}>
@@ -31,7 +56,11 @@ export const LoginForm = ({ navigation }) => {
                 onChangeText={setUsuario}
                 mode="outlined"
 
+
             />
+            <HelperText type="error" visible={hasErrors}>
+               {errorCorreo}ff
+            </HelperText>
 
             <TextInput
                 label="Contraseña"
@@ -40,13 +69,16 @@ export const LoginForm = ({ navigation }) => {
                 mode="outlined"
 
             />
+              <HelperText type="error" visible={hasErrors}>
+               {errorPassword}ff
+            </HelperText>
         </View>
         <View style={styles.cajaBotones}>
 
             <Button
                 title='Inciar Sesion'
                 onPress={ValidarLogin}
-                buttonStyle={{ borderRadius: 10, backgroundColor:theme.colors.morado }}
+                buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.morado }}
                 containerStyle={{
                     width: 200,
                     paddingTop: 40
@@ -66,7 +98,7 @@ export const LoginForm = ({ navigation }) => {
             </View>
             <Button
                 title='Crear Cuenta'
-                onPress={()=>{
+                onPress={() => {
                     navigation.navigate("RegistrarNav")
                 }}
                 buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}

@@ -13,6 +13,7 @@ export const Ingresar = (email, password) => {
       // Signed in 
       const user = userCredential.user;
       console.log("correcto ingreso", user)
+      global.userIdLogin=user.uid
       // ...
     })
     .catch((error) => {

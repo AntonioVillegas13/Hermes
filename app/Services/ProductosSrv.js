@@ -48,9 +48,9 @@ export const consultarProducto = async () => {
 
 }
 
-export const EnviarDatos = (pedido) => {
-    const productRef = doc(global.dbCon, "Pedidos", pedido.codigo);
-    setDoc(productRef, pedido);
+export const enviarPedidos = (pedido) => {
+    const  pedidoRef= doc(global.dbCon, "Pedidos", pedido.codigo);
+    setDoc(pedidoRef, pedido);
 
 
 

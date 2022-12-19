@@ -2,15 +2,19 @@ import { Button } from "@rneui/base";
 import { useEffect } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
-import { EnviarDatos  } from "../../Services/ProductosSrv";
+import { enviarPedidos  } from "../../Services/ProductosSrv";
 
 export const ResumenPedido = () => {
-
+    let Total = 0
     useEffect(() => {
+
+
+        console.log("UID:",global.userIdLogin)
+
         resumen
         console.log((global.ResumenPedido));
         const productos = global.ResumenPedido
-        let Total = 0
+       
         productos.forEach(element => {
             let subTotal = element.precio * element.cantidad
             Total = Total + subTotal;
@@ -25,9 +29,15 @@ export const ResumenPedido = () => {
 
 
     const enviarDatos=()=>{
+        let  pedido={
+            total:Total,
+            productosArray:resumen,
+             codigo:global.userIdLogin
+        }
+        console.log("UID:",global.userIdLogin)
 
-        console.log("elemento enviado")
-        EnviarDatos(resumen)
+        console.log("elemento enviado",pedido)
+        // enviarPedidos(pedido)
     }
 
 

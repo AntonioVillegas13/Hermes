@@ -8,7 +8,7 @@ import theme from "../../theme/theme";
 import { TarjetaPedidos } from "../../Components/Pedidos";
 export const ListaPedidosFinal = ({ navigation }) => {
     const [pedidos, setPedidos] = useState([]);
-
+    let pedidos2;
 
 
 
@@ -17,6 +17,9 @@ export const ListaPedidosFinal = ({ navigation }) => {
         console.log("recupernado datos ")
         consultar(setPedidos);
         console.log("OED", pedidos);
+        pedidos2=pedidos.filter(item =>item.codigo ===global.userIdLogin)
+
+
     }
 
 
