@@ -16,31 +16,16 @@ export const LoginForm = ({ navigation }) => {
     const [errorCorreo, setErrorCorreo] = useState();
     const [errorPassword, setErrorPassword] = useState();
     let hasErrors = false;
-    const validate = () => {
-        if (usuario == null || usuario == "") {
-            setErrorCorreo("Debe ingresar su correo");
-            hasErrors = true;
-        } else if (!validateEmail(usuario)) {
-            setErrorCorreo("Debe ingresar un correo valido");
-            hasErrors = true;
-        }
-
-        if (contraseña == null || contraseña == "") {
-            setErrorPassword("Debe ingresar su contraseña");
-            hasErrors = true;
-        }
-    };
 
 
 
     const ValidarLogin = () => {
         hasErrors = false;
-        validate();
-        if (hasErrors) {
-            return;
-          }
-        // Alert.alert("Vlaidando")
+
         Ingresar(usuario, contraseña);
+
+        // Alert.alert("Vlaidando")
+
 
     }
 
@@ -59,7 +44,7 @@ export const LoginForm = ({ navigation }) => {
 
             />
             <HelperText type="error" visible={hasErrors}>
-               {errorCorreo}ff
+                {errorCorreo}
             </HelperText>
 
             <TextInput
@@ -69,8 +54,8 @@ export const LoginForm = ({ navigation }) => {
                 mode="outlined"
 
             />
-              <HelperText type="error" visible={hasErrors}>
-               {errorPassword}ff
+            <HelperText type="error" visible={hasErrors}>
+                {errorPassword}ff
             </HelperText>
         </View>
         <View style={styles.cajaBotones}>

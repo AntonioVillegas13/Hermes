@@ -16,8 +16,9 @@ export const ListaPedidosFinal = ({ navigation }) => {
     const recuperarProductos = () => {
         console.log("recupernado datos ")
         consultar(setPedidos);
-        console.log("OED", pedidos);
-        pedidos2=pedidos.filter(item =>item.codigo ===global.userIdLogin)
+        //console.log("OED", pedidos);
+        pedidos2=pedidos.filter(item =>item.codigo ==global.userIdLogin)
+    // console.log("LISTA PEDIDO;",pedidos[0].codigo)
 
 
     }

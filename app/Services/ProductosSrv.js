@@ -21,8 +21,11 @@ export const consultar = async (fnsetPedidos) => {
     const SnapPedidos = await getDocs(productoRef);
     let PedidoArray = []
     SnapPedidos.forEach((documento) => {
-        console.log("doc", documento.data());
-        PedidoArray.push(documento.data());
+        if (documento.data().codigo==!global.userIdLogin){
+            console.log("doc", documento.data());
+            PedidoArray.push(documento.data());
+        }
+        
 
     });
 
