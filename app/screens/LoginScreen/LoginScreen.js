@@ -15,13 +15,49 @@ export const LoginForm = ({ navigation }) => {
     const [contraseña, setcontraseña] = useState();
     const [errorCorreo, setErrorCorreo] = useState();
     const [errorPassword, setErrorPassword] = useState();
-    let hasErrors = false;
+    const [hasErrorcorreo, sethasErrorcorreo] = useState(false)
+    const [hasErrorcontraseña, sethasErrorcontraseña] = useState();
+    const [cambiarOjo, setCambiarOjo] = useState(false);
+
+    const validaciones = () => {
+        if (contraseña == null || contraseña == "") {
+            sethasErrorcontraseña(true)
+            setErrorPassword("ingrese una contraseña")
+
+        } else {
+
+            sethasErrorcontraseña(false)
+        }
+        if (usuario == null || usuario == "") {
+            sethasErrorcorreo(true)
+            setErrorCorreo("Ingrese un correo")
+
+        } else {
+
+            sethasErrorcorreo(false)
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
 
 
 
     const ValidarLogin = () => {
-        hasErrors = false;
-
+        validaciones()
         Ingresar(usuario, contraseña);
 
         // Alert.alert("Vlaidando")
@@ -43,7 +79,7 @@ export const LoginForm = ({ navigation }) => {
 
 
             />
-            <HelperText type="error" visible={hasErrors}>
+            <HelperText type="error" visible={hasErrorcorreo}>
                 {errorCorreo}
             </HelperText>
 
@@ -52,10 +88,25 @@ export const LoginForm = ({ navigation }) => {
                 value={contraseña}
                 onChangeText={setcontraseña}
                 mode="outlined"
+                secureTextEntry={cambiarOjo}
+                right={
+                    cambiarOjo ? <TextInput.Icon icon="eye"
+                        
+                        onPress={() => {
+                            setCambiarOjo(!cambiarOjo);
+                            return false;
+                        }} /> : <TextInput.Icon icon="eye"
+                            onPress={() => {
+                                setCambiarOjo(!cambiarOjo);
+                                return false;
+                            }} />
+                }
+
+
 
             />
-            <HelperText type="error" visible={hasErrors}>
-                {errorPassword}ff
+            <HelperText type="error" visible={hasErrorcontraseña}>
+                {errorPassword}
             </HelperText>
         </View>
         <View style={styles.cajaBotones}>

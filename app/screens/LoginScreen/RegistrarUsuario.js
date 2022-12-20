@@ -1,6 +1,6 @@
 import { Button, Input, Icon } from "@rneui/base"
 import { useState } from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, Text, Alert } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
 import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
@@ -14,7 +14,72 @@ export const Registrar = ({ navigation }) => {
     const [clave, setClave] = useState();
     const [confirmar, setConfirmar] = useState();
     const [uid, setuid] = useState("");
+    const [cambiarOjo, setCambiarOjo] = useState(false);
+    const [cambiarOjo2, setCambiarOjo2] = useState(false);
+    
+    const [hasErrorusuario, sethasErrorusuario] = useState(false)
+    const [hasErrorcedula, sethasErrorcedula] = useState(false)
+    const [hasErrorcorreo, sethasErrorcorreo] = useState(false)
+    const [hasErrorclave, sethasErrorclave] = useState(false)
+    const [hasErrorconfirmacion, sethasErrorconfirmacion] = useState(false)
+    
+    const [mensajeUsuario, setmensajeusuario] = useState("")
+    const [mensajeCedula, setmensajecedula] = useState("")
+    const [mensajeCorreo, setmensajecorreo] = useState("")
+    const [mensajeclave, setmensajeclave] = useState("")
+    const [mensajeConfirmacion, setmensajeconfirmacion] = useState("")
 
+
+    const validaciones = () => {
+        if (usuario == null || usuario == "") {
+            sethasErrorusuario(true)
+            setmensajeusuario("Ingrese un nombre")
+
+        } else {
+            sethasErrorusuario(false)
+
+        }
+
+        if (cedula == null || cedula == "") {
+            sethasErrorcedula(true)
+            setmensajecedula("Ingrese una contraseña")
+            
+        } else {
+            sethasErrorcedula(false)
+
+        }
+        if (correo == null || correo == "") {
+            sethasErrorcorreo(true)
+            setmensajecorreo("Ingrese un correo")
+
+        } else {
+            sethasErrorcorreo(false)
+
+        }
+        if (clave == null || clave == "") {
+            sethasErrorclave(true)
+            setmensajeclave("Ingrese una contraseña")
+        } else {
+            sethasErrorclave(false)
+
+        }
+        if (confirmar == null || clave == "") {
+            sethasErrorconfirmacion(true)
+            setmensajeconfirmacion("Ingrese una confirmacion de contraseña")
+
+        } else {
+            sethasErrorclave(false)
+
+        }
+        
+        if(hasErrorconfirmacion &&hasErrorclave &&hasErrorcorreo&&hasErrorcedula&&hasErrorusuario){
+            Alert.alert("no se creo")
+            return null;ss
+        }else{
+            crearUsuario();
+        }
+
+    }
 
     const crearUsuario = () => {
         CrearUsuario(correo, clave);
@@ -97,14 +162,18 @@ export const Registrar = ({ navigation }) => {
                 onChangeText={setClave}
                 KeyboardType="email-address"
                 mode="outlined"
-                lefIcon={
-                    <Icon
-                        name="user"
-                        size={24}
-                        color='black'
-                        type='ant-design'
-                    />
+                secureTextEntry={cambiarOjo}
+                right={
+                    cambiarOjo ? <TextInput.Icon icon="eye"
 
+                        onPress={() => {
+                            setCambiarOjo(!cambiarOjo);
+                            return false;
+                        }} /> : <TextInput.Icon icon="eye"
+                            onPress={() => {
+                                setCambiarOjo(!cambiarOjo);
+                                return false;
+                            }} />
                 }
 
             />
@@ -115,14 +184,18 @@ export const Registrar = ({ navigation }) => {
                 onChangeText={setConfirmar}
                 KeyboardType="email-address"
                 mode="outlined"
-                lefIcon={
-                    <Icon
-                        name="user"
-                        size={24}
-                        color='black'
-                        type='ant-design'
-                    />
+                secureTextEntry={cambiarOjo2}
+                right={
+                    cambiarOjo2 ? <TextInput.Icon icon="eye"
 
+                        onPress={() => {
+                            setCambiarOjo2(!cambiarOjo2);
+                            return false;
+                        }} /> : <TextInput.Icon icon="eye"
+                            onPress={() => {
+                                setCambiarOjo2(!cambiarOjo2);
+                                return false;
+                            }} />
                 }
             />
 
@@ -136,7 +209,7 @@ export const Registrar = ({ navigation }) => {
         <View style={styles.cajaBotones}>
             <Button
                 title='Crear Usuario'
-                onPress={crearUsuario}
+                onPress={validaciones}
                 buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
                 containerStyle={{
                     width: 200,
