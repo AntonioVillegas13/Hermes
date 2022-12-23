@@ -12,16 +12,20 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
 
 
+    useEffect(() => {
+        recuperarProductos();
+    }, [])
+
 
     const recuperarProductos = () => {
         console.log("recupernado datos ")
         consultar(setPedidos);
         //console.log("OED", pedidos);
-        console.log("Uid",global.userIdLogin)
-        pedidos2=pedidos.filter(item =>item.codigo ==global.userIdLogin)
-        console.log("PEDIDOS2",pedidos2)
-        console.log("PEDIDOS",pedidos)
-    // console.log("LISTA PEDIDO;",pedidos[0].codigo)
+        console.log("Uid", global.userIdLogin)
+        // pedidos2 = pedidos.filter(item => item.codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2")
+
+        console.log("PEDIDOS2", pedidos2)
+        console.log("PEDIDOS", pedidos)
 
 
     }
@@ -30,34 +34,16 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
 
 
-    useEffect(() => {
-        recuperarProductos();
-    }, [])
-
-
-
-
     return <View style={styles.container}>
         <View style={styles.cajaCabecera} >
 
-            <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS2</Text>
+            <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
         </View>
         <View style={styles.cajaCuerpo} >
 
 
             <TarjetaPedidos pedidos={pedidos} />
-            {/* <FlatList
-                data={pedidos}
-                renderItem={(e) => {
 
-                    return <ItemProduct
-                        indice={e.index}
-                        prod={e.item}
-                    />
-                }}
-                keyExtractor={(item) => { return item.codigo }}
-
-            /> */}
         </View>
         <View style={styles.cajaBotones}>
             <Button

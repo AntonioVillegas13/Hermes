@@ -21,11 +21,13 @@ export const consultar = async (fnsetPedidos) => {
     const SnapPedidos = await getDocs(productoRef);
     let PedidoArray = []
     SnapPedidos.forEach((documento) => {
-        if (documento.data().codigo==!global.userIdLogin){
-            console.log("doc", documento.data());
+        console.log("doc", documento.data());
+        if (documento.data().codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2") {
+            console.log("doce", documento.data());
             PedidoArray.push(documento.data());
         }
-        
+
+
 
     });
 
@@ -52,7 +54,7 @@ export const consultarProducto = async () => {
 }
 
 export const enviarPedidos = (pedido) => {
-    const  pedidoRef= doc(global.dbCon, "Pedidos", pedido.codigo);
+    const pedidoRef = doc(global.dbCon, "Pedidos", pedido.codigo);
     setDoc(pedidoRef, pedido);
 
 

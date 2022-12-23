@@ -21,6 +21,7 @@ import { Icon } from '@rneui/base';
 import { ArmarPedido } from './app/screens/ClienteScreen/ArmarPedido';
 import PedidosContext from './app/context/PedidosContext'
 import { ResumenPedido } from './app/screens/ClienteScreen/ResumenPedido';
+import theme from './app/theme/theme';
 
 const Stack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
@@ -35,13 +36,15 @@ const ClientesTab = () => {
       component={ListaPedidosFinal}
       options={{
         title: "Pedidos"
+        
       }}
     />
     <Stack.Screen
       name="TabArmarPedido"
       component={ArmarPedidoTab}
       options={{
-        title: "Pedidos"
+        title: "Pedidos",
+        
       }}
     />
 
@@ -53,12 +56,43 @@ const ClientesTab = () => {
 }
 
 const ArmarPedidoTab = () => {
-  return <Tab.Navigator>
+  return <Tab.Navigator  screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
+
+      if (route.name === 'TabArmarPedido1') {
+        iconName ="pencil-square-o"
+      } else if (route.name === 'TabResumenPedidos') {
+        iconName = "shopping-cart";
+      }
+
+      // You can return any component that you like here!
+      return <Icon name={iconName} size={size} color={color} type='font-awesome' />;
+    },
+    tabBarActiveTintColor: theme.colors.morado,
+    tabBarInactiveTintColor: 'gray',
+     tabBarStyle: {
+          // position: 'absolute',
+          backgroundColor: "#FBFBFF",
+          height: 60,
+        },
+         tabBarHideOnKeyboard: true,
+        headerShown: false,
+        // tabBarShowLabel: false,
+  })} 
+  
+  
+  
+  >
+
+
+
     <Tab.Screen
       name="TabArmarPedido1"
       component={ArmarPedido}
       options={{
         title: "ArmarPedidos"
+        
       }}
     />
 
