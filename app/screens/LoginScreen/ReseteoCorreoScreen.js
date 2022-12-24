@@ -5,6 +5,7 @@ import { cerrarSesion } from "../../Services/AutenticacionSrv";
 import { ResetContraseña } from "../../Services/AutenticacionSrv";
 import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
+import theme from "../../theme/theme";
 
 
 export const ReseteoForm = ({ navigation }) => {
@@ -21,7 +22,7 @@ export const ReseteoForm = ({ navigation }) => {
         <View style={styles.cajaCabecera} >
         <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
 
-            <Text>Login Sistema </Text>
+            {/* <Text>Login Sistema </Text> */}
         </View>
         <View style={styles.cajaCuerpo} >
             <TextInput
@@ -46,6 +47,11 @@ export const ReseteoForm = ({ navigation }) => {
             <Button
                 title='Resetear Contraseña'
                 onPress={Reseteo}
+                buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
+                containerStyle={{
+                    width: 200,
+                    paddingTop: 40
+                }}
 
             />
 

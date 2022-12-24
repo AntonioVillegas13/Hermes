@@ -191,8 +191,9 @@ export const ArmarPedido = ({ navigation }) => {
                     console.log("")
                     setTxtCantidad(e)
                 }}
-                KeyboardType="email-address"
+                keyboardType="numeric"
                 mode="outlined"
+                
                 lefIcon={
                     <Icon
                         name="user"
@@ -254,6 +255,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         padding: 25,
+    paddingTop:100,
         marginBottom: 20
     },
     cajaCuerpo: {

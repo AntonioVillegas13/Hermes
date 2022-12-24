@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
 import { enviarPedidos } from "../../Services/ProductosSrv";
+import theme from "../../theme/theme";
 
 export const ResumenPedido = () => {
     let Total = 0
@@ -58,9 +59,9 @@ export const ResumenPedido = () => {
                 <ScrollView style={styles.impar} >
                     <TouchableHighlight onPress={() => {
                     }}>
-                        <View style={{ margin: 10 }}>
+                        <View style={{ margin: 10,borderWidth:3,margin:20 }}>
                             <View style={styles.ViewRow}>
-                                <Text>PEDIDO #</Text>
+                                <Text>Producto #{prod.codigo}</Text>
                                 <Text>{prod.nombre}</Text>
                             </View>
 
@@ -79,7 +80,9 @@ export const ResumenPedido = () => {
     let resumen = global.ResumenPedido;
 
     return (
-        <View >
+
+
+        <View  style={styles.container}>
             <FlatList
                 data={resumen}
 
@@ -101,15 +104,20 @@ export const ResumenPedido = () => {
 
 
 
+            <View style={styles.cajaBotones}>
 
+                <Button
+                    title='Enviar Pedido'
+                    onPress={enviarDatos}
+                    buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
+                    containerStyle={{
+                        width: 200,
+                        paddingTop: 40
+                    }}
 
-            <Button
-                title='Cerrar Sesion'
-                onPress={enviarDatos}
-
-            />
+                />
+            </View>
         </View>
-
     )
 
 
@@ -125,9 +133,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffff',
-        //alignItems: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        padding: 10
+        
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
@@ -136,13 +144,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         padding: 25,
         marginBottom: 20
+        
     },
     cajaCuerpo: {
         //backgroundColor: 'brown',
         flex: 6,
         alignItems: 'stretch',
         paddingHorizontal: 30,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
     },
     titulo: {
         fontSize: 16,
@@ -154,7 +163,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        flex: 2
+        flex: 1
     },
     txtinput: {
         borderWidth: 1,
@@ -172,6 +181,7 @@ const styles = StyleSheet.create({
         top: -11,
         left: 10,
         marginLeft: 11,
-    }
+    },
+    
 
 });

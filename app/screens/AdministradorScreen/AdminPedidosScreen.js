@@ -1,12 +1,11 @@
 
+import { useEffect, useState } from "react";
 import { View, Text, Alert, StyleSheet, FlatList, TouchableHighlight, ScrollView } from "react-native"
-import { Button, FAB } from "@rneui/base"
-import { consultar } from "../../Services/ProductosSrv"
-import { useEffect, useState } from "react"
-import { cerrarSesion } from "../../Services/AutenticacionSrv";
-import theme from "../../theme/theme";
 import { TarjetaPedidos } from "../../Components/Pedidos";
-export const ListaPedidosFinal = ({ navigation }) => {
+import { consultarPedidosGenerales } from "../../Services/AdminSrv";
+import theme from "../../theme/theme";
+
+export function AdminPedidos() {
     const [pedidos, setPedidos] = useState([]);
     let pedidos2;
 
@@ -17,9 +16,11 @@ export const ListaPedidosFinal = ({ navigation }) => {
     }, [])
 
 
+
+
     const recuperarProductos = () => {
         console.log("recupernado datos ")
-        consultar(setPedidos);
+        consultarPedidosGenerales(setPedidos);
         //console.log("OED", pedidos);
         console.log("Uid", global.userIdLogin)
         // pedidos2 = pedidos.filter(item => item.codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2")
@@ -36,46 +37,24 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
     return <View style={styles.container}>
         <View style={styles.cajaCabecera} >
-
-            <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
+            <Text style={{ fontSize: 42 }}>Pedidos</Text>
+            <Text style={{ fontSize: 42 }}>Generales</Text>
         </View>
         <View style={styles.cajaCuerpo} >
-
-
             <TarjetaPedidos pedidos={pedidos} />
-
         </View>
-        <View style={styles.cajaBotones}>
-            <Button
-                title='Cerrar Sesion'
-                onPress={cerrarSesion}
-
-            />
-        </View>
-
-
-        <FAB
-            title="+ "
-            placement="right"
-            onPress={() => {
-                navigation.navigate("TabArmarPedido")
-            }
-            }
-        />
-
     </View>
 
-
-
-
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffff',
-        alignItems: 'stretch',
-        justifyContent: 'flex-start'
+        alignItems: 'center',
+        justifyContent: 'center',
+       
     },
     impar: {
 
@@ -154,13 +133,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginBottom: 50,
-        paddingTop:100,
+        paddingTop: 75,
     },
     cajaCuerpo: {
         // backgroundColor: 'brown',
-        flex: 5,
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
+        flex: 3,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     titulo: {
         fontSize: 16,
