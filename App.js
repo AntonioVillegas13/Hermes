@@ -297,7 +297,7 @@ export default function App() {
 
 
     <NavigationContainer>
-      {Login ? <Administrador /> : <LoginNav />} 
+      {Login ? <ClientesTab /> : <LoginNav />} 
       {/* //Administrador ClientesTab */}
     </NavigationContainer>
 
