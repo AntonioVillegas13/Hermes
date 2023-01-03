@@ -21,29 +21,32 @@ import { Icon } from '@rneui/base';
 import { ArmarPedido } from './app/screens/ClienteScreen/ArmarPedido';
 import PedidosContext from './app/context/PedidosContext'
 import { ResumenPedido } from './app/screens/ClienteScreen/ResumenPedido';
-import{AdminPedidos} from './app/screens/AdministradorScreen/AdminPedidosScreen'
+import { AdminPedidos } from './app/screens/AdministradorScreen/AdminPedidosScreen'
 import theme from './app/theme/theme';
+import { DetallePedido } from './app/screens/ClienteScreen/DetallePedido';
+
 
 const Stack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
-
+const DetalleStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 const ClientesTab = () => {
   return <Stack.Navigator
-  
-  
-  screenOptions={{
-    tabBarHideOnKeyboard: true,
-    headerShown: false,}
-  }>
+
+
+    screenOptions={{
+      tabBarHideOnKeyboard: true,
+      headerShown: false,
+    }
+    }>
     <Stack.Screen
       name="TabListaPedidos"
       component={ListaPedidosFinal}
       options={{
         title: "Pedidos"
-        
+
       }}
     />
     <Stack.Screen
@@ -51,7 +54,16 @@ const ClientesTab = () => {
       component={ArmarPedidoTab}
       options={{
         title: "Pedidos",
-        
+
+      }}
+    />
+
+<Stack.Screen
+      name="detallePedido"
+      component={DetallePedido}
+      options={{
+        title: "Pedidos",
+
       }}
     />
 
@@ -61,57 +73,59 @@ const ClientesTab = () => {
 
 
 }
-const Administrador=()=>{
-return <Tab.Navigator screenOptions={({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
-    let iconName;
+const Administrador = () => {
+  return <Tab.Navigator screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
 
-    if (route.name === 'TabArmarPedido1') {
-      iconName ="pencil-square-o"
-    } else if (route.name === 'TabPedidosAdmin') {
-      iconName = "shopping-cart";
-    }
+      if (route.name === 'TabArmarPedido1') {
+        iconName = "pencil-square-o"
+      } else if (route.name === 'TabPedidosAdmin') {
+        iconName = "shopping-cart";
+      }
 
-    // You can return any component that you like here!
-    return <Icon name={iconName} size={size} color={color} type='font-awesome' />;
-  },
-  tabBarActiveTintColor: theme.colors.morado,
-  tabBarInactiveTintColor: 'gray',
-   tabBarStyle: {
-        // position: 'absolute',
-        backgroundColor: "#FBFBFF",
-        height: 60,
-      },
-       tabBarHideOnKeyboard: true,
-      headerShown: false,
-      // tabBarShowLabel: false,
-})} 
+      // You can return any component that you like here!
+      return <Icon name={iconName} size={size} color={color} type='font-awesome' />;
+    },
+    tabBarActiveTintColor: theme.colors.morado,
+    tabBarInactiveTintColor: 'gray',
+    tabBarStyle: {
+      // position: 'absolute',
+      backgroundColor: "#FBFBFF",
+      height: 60,
+    },
+    tabBarHideOnKeyboard: true,
+    headerShown: false,
+    // tabBarShowLabel: false,
+  })}
 
 
->
+  >
     <Tab.Screen
       name="TabPedidosAdmin"
       component={AdminPedidos}
       options={{
         title: "PedidosAdminstrador"
-        
+
       }}
     />
 
 
 
-</Tab.Navigator>
+  </Tab.Navigator>
 
 
 
 }
+
+
 const ArmarPedidoTab = () => {
-  return <Tab.Navigator  screenOptions={({ route }) => ({
+  return <Tab.Navigator screenOptions={({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
 
       if (route.name === 'TabArmarPedido1') {
-        iconName ="pencil-square-o"
+        iconName = "pencil-square-o"
       } else if (route.name === 'TabResumenPedidos') {
         iconName = "shopping-cart";
       }
@@ -121,18 +135,18 @@ const ArmarPedidoTab = () => {
     },
     tabBarActiveTintColor: theme.colors.morado,
     tabBarInactiveTintColor: 'gray',
-     tabBarStyle: {
-          // position: 'absolute',
-          backgroundColor: "#FBFBFF",
-          height: 60,
-        },
-         tabBarHideOnKeyboard: true,
-        headerShown: false,
-        // tabBarShowLabel: false,
-  })} 
-  
-  
-  
+    tabBarStyle: {
+      // position: 'absolute',
+      backgroundColor: "#FBFBFF",
+      height: 60,
+    },
+    tabBarHideOnKeyboard: true,
+    headerShown: false,
+    // tabBarShowLabel: false,
+  })}
+
+
+
   >
 
 
@@ -142,7 +156,7 @@ const ArmarPedidoTab = () => {
       component={ArmarPedido}
       options={{
         title: "ArmarPedidos"
-        
+
       }}
     />
 
@@ -154,11 +168,28 @@ const ArmarPedidoTab = () => {
       }}
     />
 
+    <Tab.Screen
+      name="detallePedidoNav"
+      component={DetallePedidoNav}
+      options={{
+        title: "detalle"
+      }}
+    />
+
   </Tab.Navigator>
 
 }
 
-
+const DetallePedidoNav = () => {
+  return <DetalleStack.Navigator>
+    <DetalleStack.Screen
+      name="detallepedido"
+      options={{
+        headerShown: false
+      }}
+      component={DetallePedido} />
+  </DetalleStack.Navigator>
+}
 
 
 
@@ -249,7 +280,7 @@ const ProductoNav = () => {
   }} >
     <Stack.Screen name='ListaProductosNav' component={ListaPedidos} />
     <Stack.Screen name='PedidosNav' component={Pedidos} />
-
+    <Stack.Screen name='Resumenpedidos' component={DetallePedido} />
 
 
 
@@ -297,7 +328,7 @@ export default function App() {
 
 
     <NavigationContainer>
-      {Login ? <ClientesTab /> : <LoginNav />} 
+      {Login ? <ClientesTab /> : <LoginNav />}
       {/* //Administrador ClientesTab */}
     </NavigationContainer>
 

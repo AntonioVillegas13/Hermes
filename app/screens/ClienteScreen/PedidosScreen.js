@@ -42,12 +42,13 @@ export const ListaPedidosFinal = ({ navigation }) => {
         <View style={styles.cajaCuerpo} >
 
 
-            <TarjetaPedidos pedidos={pedidos} />
+            <TarjetaPedidos pedidos={pedidos} navegar={navigation} />
 
         </View>
         <View style={styles.cajaBotones}>
             <Button
                 title='Cerrar Sesion'
+                color={theme.colors.jade}
                 onPress={cerrarSesion}
 
             />
@@ -56,6 +57,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
         <FAB
             title="+ "
+            color={theme.colors.morado}
             placement="right"
             onPress={() => {
                 navigation.navigate("TabArmarPedido")

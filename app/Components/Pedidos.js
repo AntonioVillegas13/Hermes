@@ -2,12 +2,18 @@ import { FlatList, ScrollView, TouchableHighlight, StyleSheet, View, Text } from
 
 export const TarjetaPedidos = (props) => {
 
+
+
+
+
+
     let ItemProduct = ({ prod, indice }) => {
 
         return (
 
             <ScrollView style={styles.impar} >
                 <TouchableHighlight onPress={() => {
+                     props.navegar.navigate('detallePedido',{Itemid:prod.codigo})
                 }}>
                     <View style={{ margin: 10 }}>
                         <View style={styles.ViewRow}>

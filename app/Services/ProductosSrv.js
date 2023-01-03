@@ -22,10 +22,10 @@ export const consultar = async (fnsetPedidos) => {
     let PedidoArray = []
     SnapPedidos.forEach((documento) => {
         console.log("doc", documento.data());
-        // if (documento.data().codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2") {
+        if (documento.data().codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2") {
             console.log("doce", documento.data());
             PedidoArray.push(documento.data());
-        // }
+        }
 
 
 
