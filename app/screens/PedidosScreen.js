@@ -3,11 +3,9 @@ import {View,Text,StyleSheet,Alert}  from 'react-native'
 import { Input ,Button,Icon} from '@rneui/base';
 import { useState } from 'react';
 // Import the functions you need from the SDKs you need
-import { loadConfiguration } from '../utils/FirebaseConfig';
 import { guardar,guardar2} from '../Services/ProductosSrv'
 
 export const Pedidos =({navigation,route})=>{
-    loadConfiguration();
 const GuardarProducto=()=>{
     Alert.alert("Guardando");
 

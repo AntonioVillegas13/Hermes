@@ -13,7 +13,7 @@ export const Ingresar = (email, password) => {
       // Signed in 
       const user = userCredential.user;
       console.log("correcto ingreso", user)
-      global.userIdLogin=user.uid
+      global.userIdLogin = user.uid
       // ...
     })
     .catch((error) => {
@@ -40,15 +40,15 @@ export const cerrarSesion = () => {
 
 }
 
-export const CrearUsuario = async(email, password) => {
+export const CrearUsuario = async (email, password) => {
 
   const auth = getAuth();
- await createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
       console.log("usuario Creado:", user.uid)
-      global.userId=user.uid
+      global.userId = user.uid
       // ...
     })
     .catch((error) => {
