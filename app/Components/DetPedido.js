@@ -1,56 +1,45 @@
+import { useEffect } from "react";
 import { FlatList, ScrollView, TouchableHighlight, StyleSheet, View, Text } from "react-native";
 
-export const TarjetaPedidos = (props) => {
+export const TarjetaDetallePedidos = (props) => {
+
+    const Pedido=props.item;
+
+    useEffect(() => {
+       console.log("PEDIDO",Pedido);
+    }, [])
 
 
 
 
 
 
-    let ItemProduct = ({ prod, indice }) => {
 
-        return (
 
-            <ScrollView style={styles.impar} >
-                <TouchableHighlight onPress={() => {
-                    console.log("prod----------------------------------",prod)
-                     props.navegar.navigate('detallePedido',{pedido:prod.productosArray })
-                }}>
-                    <View style={{ margin: 10 }}>
-                        <View style={styles.ViewRow}>
-                            <Text>PEDIDO #</Text>
-                            <Text>{prod.codigo}</Text>
-                        </View>
 
+
+
+    return (
+
+        <ScrollView style={styles.impar} >
+            <TouchableHighlight onPress={() => {
+                console.log("hacia el detalle")
+            }}>
+                <View style={{ margin: 10 }}>
+                    <View style={styles.ViewRow}>
+                        <Text>PEDIDO #</Text>
+                        <Text>{props.itemID}</Text>
                     </View>
 
-
-                </TouchableHighlight>
-
-            </ScrollView  >
-
-        );
-    }
+                </View>
 
 
+            </TouchableHighlight>
 
+        </ScrollView  >
 
+    );
 
-
-
-
-    return <FlatList
-        data={props.pedidos}
-        renderItem={(e) => {
-
-            return <ItemProduct
-                indice={e.index}
-                prod={e.item}
-            />
-        }}
-        keyExtractor={(item) => { return item.codigo }}
-
-    />
 
 
 }

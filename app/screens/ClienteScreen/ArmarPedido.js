@@ -24,14 +24,17 @@ export const ArmarPedido = ({ navigation }) => {
 
     useEffect(() => {
         cargarProducto();
+        const willFocusSubscription = navigation.addListener("focus", () => {
+            cargarProducto();
+        });
     }, [])
     // useEffect(() => {
     //     setTxtCod(selectedItem?.precio)
     // }, [selectedItem])
 
 
-    const cargarProducto = () => {
-        consultarProducto()
+    const cargarProducto = async() => {
+        await consultarProducto();
         let response = Productos
         let lista = []
         if (response) {
@@ -130,7 +133,7 @@ export const ArmarPedido = ({ navigation }) => {
                 value={selectedItem?.title}
                 label='Nombre'
                 editable={false}
-               
+
                 onChangeText={setTxtNomP}
                 KeyboardType="email-address"
                 mode="outlined"
@@ -165,7 +168,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-                value={selectedItem?.price  }
+                value={selectedItem?.price}
                 label='Precio'
                 editable={false}
 
@@ -193,7 +196,7 @@ export const ArmarPedido = ({ navigation }) => {
                 }}
                 keyboardType="numeric"
                 mode="outlined"
-                
+
                 lefIcon={
                     <Icon
                         name="user"
@@ -255,7 +258,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         padding: 25,
-    paddingTop:100,
+        paddingTop: 100,
         marginBottom: 20
     },
     cajaCuerpo: {

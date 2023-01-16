@@ -13,7 +13,12 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
 
     useEffect(() => {
+        
         recuperarProductos();
+        const willFocusSubscription = navigation.addListener("focus", () => {
+            recuperarProductos();
+        });
+        return willFocusSubscription;
     }, [])
 
 
