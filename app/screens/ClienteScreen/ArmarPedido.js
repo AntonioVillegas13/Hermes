@@ -27,6 +27,9 @@ export const ArmarPedido = ({ navigation }) => {
         const willFocusSubscription = navigation.addListener("focus", () => {
             cargarProducto();
         });
+        
+        return willFocusSubscription;
+      
     }, [])
     // useEffect(() => {
     //     setTxtCod(selectedItem?.precio)

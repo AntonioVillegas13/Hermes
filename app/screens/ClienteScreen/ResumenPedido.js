@@ -1,31 +1,40 @@
 import { Button } from "@rneui/base";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
 import { enviarPedidos } from "../../Services/ProductosSrv";
 import theme from "../../theme/theme";
 
-export const ResumenPedido = () => {
+export const ResumenPedido = ({ navigation }) => {
     let Total = 0
+    const [tolta,setToral]=useState();
     useEffect(() => {
 
 
-        console.log("UID:", global.userIdLogin)
 
-        resumen
-        console.log((global.ResumenPedido));
-        const productos = global.ResumenPedido
+        const willFocusSubscription = navigation.addListener("focus", () => {
+            console.log("UID:", global.userIdLogin)
 
-        productos.forEach(element => {
-            let subTotal = element.precio * element.cantidad
-            Total = Total + subTotal;
-            console.log("sum", subTotal)
+            resumen
+            console.log((global.ResumenPedido));
+            const productos = global.ResumenPedido
+
+            productos.forEach(element => {
+                let subTotal = element.precio * element.cantidad
+                Total = Total + subTotal;
+                console.log("sum", subTotal)
+            });
+
+            console.log("tOTAL", Total)
+            setToral(Total)
+
         });
+        return willFocusSubscription;
 
-        console.log("tOTAL", Total)
 
 
-    }, []);
+
+    }, [resumen]);
 
 
 
@@ -38,7 +47,7 @@ export const ResumenPedido = () => {
         console.log("UID:", global.userIdLogin)
 
         console.log("elemento enviado", pedido)
-        // enviarPedidos(pedido)
+        enviarPedidos(pedido)
     }
 
 
@@ -59,7 +68,7 @@ export const ResumenPedido = () => {
                 <ScrollView style={styles.impar} >
                     <TouchableHighlight onPress={() => {
                     }}>
-                        <View style={{ margin: 10,borderWidth:3,margin:20 }}>
+                        <View style={{ margin: 10, borderWidth: 3, margin: 20 }}>
                             <View style={styles.ViewRow}>
                                 <Text>Producto #{prod.codigo}</Text>
                                 <Text>{prod.nombre}</Text>
@@ -82,7 +91,7 @@ export const ResumenPedido = () => {
     return (
 
 
-        <View  style={styles.container}>
+        <View style={styles.container}>
             <FlatList
                 data={resumen}
 
@@ -102,13 +111,16 @@ export const ResumenPedido = () => {
             />
 
 
+            <Text>TOTAL:{tolta}</Text>
 
 
             <View style={styles.cajaBotones}>
 
                 <Button
                     title='Enviar Pedido'
-                    onPress={enviarDatos}
+                    onPress={()=>{
+                        enviarDatos();
+                    }}
                     buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
                     containerStyle={{
                         width: 200,
@@ -135,7 +147,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffff',
         alignItems: 'center',
         justifyContent: 'center',
-        
+
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         padding: 25,
         marginBottom: 20
-        
+
     },
     cajaCuerpo: {
         //backgroundColor: 'brown',
@@ -182,6 +194,6 @@ const styles = StyleSheet.create({
         left: 10,
         marginLeft: 11,
     },
-    
+
 
 });

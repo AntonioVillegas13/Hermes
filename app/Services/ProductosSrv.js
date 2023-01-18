@@ -1,6 +1,6 @@
 
 
-import { collection, doc, getDocs, setDoc, addDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, setDoc, addDoc ,getDoc} from 'firebase/firestore'
 
 
 export const guardar = (producto) => {
@@ -59,5 +59,19 @@ export const enviarPedidos = (pedido) => {
 
 
 
+
+}
+
+
+export const consultarUnPedido = async (id,fnsetObj) => {
+    //console.log("globla",global.dbCon);
+    const productoRef = doc(global.dbCon, "Pedidos",id);
+    const docSnap = await getDoc(productoRef);
+    console.log("dsfdsfdfdsfdsfds",docSnap.data());
+
+    let PedidoObj = {}
+    PedidoObj=docSnap.data();
+    fnsetObj(PedidoObj);
+    // console.log("productoFunc", PedidoObj);
 
 }

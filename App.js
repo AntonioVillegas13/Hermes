@@ -168,13 +168,13 @@ const ArmarPedidoTab = () => {
       }}
     />
 
-    <Tab.Screen
+    {/* <Tab.Screen
       name="detallePedidoNav"
       component={DetallePedidoNav}
       options={{
         title: "detalle"
       }}
-    />
+    /> */}
 
   </Tab.Navigator>
 

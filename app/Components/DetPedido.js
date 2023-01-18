@@ -3,39 +3,50 @@ import { FlatList, ScrollView, TouchableHighlight, StyleSheet, View, Text } from
 
 export const TarjetaDetallePedidos = (props) => {
 
-    const Pedido=props.item;
+    const Pedido = props.item;
+    const ObjPedido = props.objPedido
 
     useEffect(() => {
-       console.log("PEDIDO",Pedido);
+        console.log("PEDIDO", Pedido);
     }, [])
-
-
-
-
-
-
-
 
 
 
 
     return (
 
-        <ScrollView style={styles.impar} >
-            <TouchableHighlight onPress={() => {
-                console.log("hacia el detalle")
-            }}>
-                <View style={{ margin: 10 }}>
-                    <View style={styles.ViewRow}>
-                        <Text>PEDIDO #</Text>
-                        <Text>{props.itemID}</Text>
-                    </View>
+
+
+
+        <ScrollView >
+            <View style={styles.container} >
+
+
+
+                <View style={styles.cajaCabecera}>
+
+                    
+                        <Text style={styles.titulo} >PEDIDO # {Pedido}</Text>
+                    
+                </View>
+
+                <View style={styles.cajaCuerpo}>
+
+                <ScrollView >
+                    <Text>fdf</Text>
+                </ScrollView  >  
 
                 </View>
 
 
-            </TouchableHighlight>
 
+
+
+
+                <View style={styles.cajaBotones}>
+                <Text>TOTAL:{ObjPedido.total}</Text>
+                </View>
+            </View>
         </ScrollView  >
 
     );
@@ -43,34 +54,34 @@ export const TarjetaDetallePedidos = (props) => {
 
 
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffff',
         alignItems: 'stretch',
-        justifyContent: 'flex-start'
-    },
+        justifyContent: 'center',
+
+    }, fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+    }
+    ,
     impar: {
-        alignContent: "center",
-        margin: 10,
+
+        marginLeft: 1,
+        marginBottom: 20,
+        marginRight: 20,
         fontSize: 20,
         fontWeight: 'bold',
-        width: "90%",
-        // backgroundColor: '#E09726',
-        borderRadius: 5,
-        borderWidth: 2
+        //backgroundColor: '#E09726',
+        borderRadius: 5
 
 
 
 
     },
-    ViewRow: {
-        flexDirection: "row"
-    }
-
-
-    ,
     titulo: {
         fontSize: 30,
         fontFamily: 'sans-serif-condensed',
@@ -133,14 +144,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginBottom: 50
+        // marginBottom: 50,
+        paddingTop: 75,
     },
     cajaCuerpo: {
-        // backgroundColor: 'brown',
-        flex: 5,
+        backgroundColor: 'brown',
+        flex: 10,
         alignItems: 'stretch',
-        paddingHorizontal: 30,
-        justifyContent: 'flex-start',
+        justifyContent: 'center'
     },
     titulo: {
         fontSize: 16,
