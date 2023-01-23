@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { FlatList, ScrollView, TouchableHighlight, StyleSheet, View, Text } from "react-native";
+import theme from "../theme/theme";
+import PedidoCard from "./PedidoCard";
+import StyledText from "./StyledText";
+
 
 export const TarjetaDetallePedidos = (props) => {
 
@@ -19,33 +23,67 @@ export const TarjetaDetallePedidos = (props) => {
 
 
         <ScrollView >
+
+
             <View style={styles.container} >
 
 
 
-                <View style={styles.cajaCabecera}>
 
-                    
-                        <Text style={styles.titulo} >PEDIDO # {Pedido}</Text>
-                    
-                </View>
 
                 <View style={styles.cajaCuerpo}>
 
-                <ScrollView >
-                    <Text>fdf</Text>
-                </ScrollView  >  
+
+                    <StyledText subtitle bold white margin >Productos </StyledText>
+
+
+                </View>
+
+
+                <FlatList
+                    data={
+                        ObjPedido.productosArray
+                    }
+                    renderItem={({ item, index }) => {
+                        // //console.log("ordersListStock-------item------",item)
+                        return (
+                            <PedidoCard
+                                pedido={item}
+                            />
+                        );
+                    }}
+                    keyExtractor={(item, index) => {
+                        return index;
+                    }}
+                />
+
+            </View>
+            <View style={styles.container} >
+
+
+
+
+
+                <View style={styles.cajaCuerpo}>
+
+
+                    <StyledText subtitle bold white margin >Resumen </StyledText>
+
 
                 </View>
 
 
 
-
-
-
-                <View style={styles.cajaBotones}>
-                <Text>TOTAL:{ObjPedido.total}</Text>
+                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                    <StyledText body  >TOTAL:</StyledText>
+                    <StyledText body >{ObjPedido.total}</StyledText>
                 </View>
+
+                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                    <StyledText body >TOTAL:</StyledText>
+                    <StyledText body >{ObjPedido.total}</StyledText>
+                </View>
+
             </View>
         </ScrollView  >
 
@@ -60,6 +98,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffff',
         alignItems: 'stretch',
         justifyContent: 'center',
+        shadowColor: "black",
+        margin: 20
 
     }, fab: {
         position: 'absolute',
@@ -145,10 +185,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         // marginBottom: 50,
-        paddingTop: 75,
+        paddingTop: 10,
     },
     cajaCuerpo: {
-        backgroundColor: 'brown',
+        backgroundColor: theme.colors.jade,
+        flex: 10,
+        alignItems: 'stretch',
+        justifyContent: 'center'
+    }
+    ,
+    cajaCuerpo2: {
+        backgroundColor: theme.colors.morado,
         flex: 10,
         alignItems: 'stretch',
         justifyContent: 'center'

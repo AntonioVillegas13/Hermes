@@ -10,9 +10,9 @@ const theme ={
         jade:'#62DEAC'
     },
     fontSize:{
-        body:14,
-        title:50,
-        subtitle:16,
+        body:15,
+        title:40,
+        subtitle:25,
     }, 
     fonts:{
         main:'System'

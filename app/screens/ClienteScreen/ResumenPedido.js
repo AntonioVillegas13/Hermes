@@ -4,8 +4,11 @@ import { Alert } from "react-native";
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
 import { enviarPedidos } from "../../Services/ProductosSrv";
 import theme from "../../theme/theme";
+import { PedidoContext } from "../../context/PedidosContext";
+import { useContext } from 'react';
 
 export const ResumenPedido = ({ navigation }) => {
+    const {user,setUser}=useContext(PedidoContext);
     let Total = 0
     const [tolta,setToral]=useState();
     useEffect(() => {
@@ -40,9 +43,9 @@ export const ResumenPedido = ({ navigation }) => {
 
     const enviarDatos = () => {
         let pedido = {
-            total: Total,
+            total: tolta,
             productosArray: resumen,
-            codigo: global.userIdLogin
+            codigo:user
         }
         console.log("UID:", global.userIdLogin)
 

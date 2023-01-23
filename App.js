@@ -19,11 +19,13 @@ import { ContenidoA } from "./app/screens/ContenidoA";
 import { Contenidob } from "./app/screens/ContenidoB";
 import { Icon } from '@rneui/base';
 import { ArmarPedido } from './app/screens/ClienteScreen/ArmarPedido';
-import PedidosContext from './app/context/PedidosContext'
+import PedidosContext, { PedidoContext } from './app/context/PedidosContext'
 import { ResumenPedido } from './app/screens/ClienteScreen/ResumenPedido';
 import { AdminPedidos } from './app/screens/AdministradorScreen/AdminPedidosScreen'
 import theme from './app/theme/theme';
 import { DetallePedido } from './app/screens/ClienteScreen/DetallePedido';
+
+import { useContext } from 'react';
 
 
 const Stack = createNativeStackNavigator();
@@ -58,7 +60,7 @@ const ClientesTab = () => {
       }}
     />
 
-<Stack.Screen
+    <Stack.Screen
       name="detallePedido"
       component={DetallePedido}
       options={{
@@ -296,15 +298,17 @@ export default function App() {
     productos: []
   }
   const [Login, setlogin] = useState(false);
-  const registarObserver = () => {
+  const[user,setUser]=useState();
+  const registarObserver = async() => {
     const auth = getAuth();
     if (!global.DesSuscribirObserver) {
-      global.DesSuscribirObserver = onAuthStateChanged(auth, (user) => {
+      global.DesSuscribirObserver = await onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
 
           const uid = user.uid;
+          setUser(uid)
           console.log("Observer Cambia !!!!a sing in1")
           setlogin(true);
           console.log("L,", Login)
@@ -326,11 +330,11 @@ export default function App() {
 
   return (
 
-
-    <NavigationContainer>
-      {Login ? <ClientesTab /> : <LoginNav />}
-      {/* //Administrador ClientesTab */}
-    </NavigationContainer>
-
+    <PedidoContext.Provider value={{user,setUser}} >
+      <NavigationContainer>
+        {Login ? <ClientesTab /> : <LoginNav />}
+        {/* //Administrador ClientesTab */}
+      </NavigationContainer>
+    </PedidoContext.Provider>
   );
 }

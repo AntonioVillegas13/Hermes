@@ -1,19 +1,39 @@
-import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 
 // export const VerificarRol=(){
 //   const 
 // }
 
-
-export const Ingresar = (email, password) => {
+export const RecuperarUsuario= async(fnsetId)=>{
   const auth = getAuth();
-  signInWithEmailAndPassword(auth, email, password)
+  await onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      console.log("-------------------------Funcion Recuperar Usuario")
+      const uid = user.uid;
+
+     
+      console.log("UID",uid)
+      fnsetId(uid)
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
+}
+export const Ingresar = async(email, password) => {
+  const auth = getAuth();
+ await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
       console.log("correcto ingreso", user)
-      global.userIdLogin = user.uid
+      //global.userIdLogin = user.uid
+      // fnsetId(user.uid)
       // ...
     })
     .catch((error) => {
@@ -40,7 +60,7 @@ export const cerrarSesion = () => {
 
 }
 
-export const CrearUsuario = async (email, password) => {
+export const CrearUsuario = async (email, password,SetUid) => {
 
   const auth = getAuth();
   await createUserWithEmailAndPassword(auth, email, password)
@@ -49,6 +69,7 @@ export const CrearUsuario = async (email, password) => {
       const user = userCredential.user;
       console.log("usuario Creado:", user.uid)
       global.userId = user.uid
+      SetUid(useruid)
       // ...
     })
     .catch((error) => {
@@ -57,6 +78,9 @@ export const CrearUsuario = async (email, password) => {
       console.log("Error al crear usuario:", errorMessage)
       // ..
     });
+
+
+
 }
 
 export const ResetContraseña = (email) => {

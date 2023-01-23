@@ -3,10 +3,14 @@ import { View, Text, Alert, StyleSheet, FlatList, TouchableHighlight, ScrollView
 import { Button, FAB } from "@rneui/base"
 import { consultar } from "../../Services/ProductosSrv"
 import { useEffect, useState } from "react"
-import { cerrarSesion } from "../../Services/AutenticacionSrv";
+import { cerrarSesion, RecuperarUsuario } from "../../Services/AutenticacionSrv";
 import theme from "../../theme/theme";
 import { TarjetaPedidos } from "../../Components/Pedidos";
+import { PedidoContext } from "../../context/PedidosContext";
+import { useContext } from 'react';
 export const ListaPedidosFinal = ({ navigation }) => {
+    const {user,setUser}=useContext(PedidoContext);
+    const[uid2,setUid]=useState("3");
     const [pedidos, setPedidos] = useState([]);
     let pedidos2;
 
@@ -14,27 +18,42 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
     useEffect(() => {
         
-        recuperarProductos();
+       
         const willFocusSubscription = navigation.addListener("focus", () => {
+        recuperarUsuario();
+
             recuperarProductos();
         });
         return willFocusSubscription;
     }, [])
 
 
-    const recuperarProductos = () => {
-        console.log("recupernado datos ")
-        consultar(setPedidos);
+    const recuperarProductos = async() => {
+        console.log("------------------------- Recuperar Producto")
+
+        console.log("recupernado datos ",uid2)
+        await consultar(setPedidos,user);
         //console.log("OED", pedidos);
-        console.log("Uid", global.userIdLogin)
+        // console.log("Uid", global.userId )
         // pedidos2 = pedidos.filter(item => item.codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2")
 
-        console.log("PEDIDOS2", pedidos2)
-        console.log("PEDIDOS", pedidos)
+      
 
 
     }
 
+    const recuperarUsuario=async()=>{
+        console.log("------------------------- Recuperar Usuario")
+
+        await RecuperarUsuario(setUser);
+        console.log("UID2:",user)
+    }
+
+    const Cerrar=()=>{
+        cerrarSesion();
+        setUser();
+
+    }
 
 
 
@@ -54,7 +73,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
             <Button
                 title='Cerrar Sesion'
                 color={theme.colors.jade}
-                onPress={cerrarSesion}
+                onPress={Cerrar}
 
             />
         </View>

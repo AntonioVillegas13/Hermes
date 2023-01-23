@@ -1,9 +1,11 @@
 
 
-import { collection, doc, getDocs, setDoc, addDoc ,getDoc} from 'firebase/firestore'
+import { collection, doc, getDocs, setDoc, addDoc ,getDoc,query,where} from 'firebase/firestore'
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 
 export const guardar = (producto) => {
+   
     console.log(global.dbCon);
     const productRef = doc(global.dbCon, "Pedidos", producto.codigo);
     setDoc(productRef, producto);
@@ -15,17 +17,19 @@ export const guardar2 = (producto) => {
     addDoc(productRef, producto);
 }
 
-export const consultar = async (fnsetPedidos) => {
-    //console.log("globla",global.dbCon);
-    const productoRef = collection(global.dbCon, "Pedidos");
+export const consultar = async (fnsetPedidos,Id) => {
+    
+    console.log("global--------------------------------",Id);
+    // const productoRef = collection(global.dbCon, "Pedidos");
+    const productoRef= query(collection(global.dbCon, "Pedidos"), where("codigo", "==",Id));
     const SnapPedidos = await getDocs(productoRef);
     let PedidoArray = []
-    SnapPedidos.forEach((documento) => {
+    await SnapPedidos.forEach((documento) => {
         console.log("doc", documento.data());
-        if (documento.data().codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2") {
-            console.log("doce", documento.data());
+       
+            console.log("doce-------------------", documento.data());
             PedidoArray.push(documento.data());
-        }
+        
 
 
 

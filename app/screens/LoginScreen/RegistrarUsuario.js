@@ -1,13 +1,14 @@
 import { Button, Input, Icon } from "@rneui/base"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { View, StyleSheet, Text, Alert } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
 import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
 import { guardarUSuario } from "../../Services/Usuarios";
 import theme from '../../theme/theme'
+import { PedidoContext } from "../../context/PedidosContext";
 export const Registrar = ({ navigation }) => {
-
+    const {user,setUser}=useContext(PedidoContext);
     const [usuario, setUsuario] = useState();
     const [cedula, setCedula] = useState();
     const [correo, setCorreo] = useState();
@@ -16,6 +17,7 @@ export const Registrar = ({ navigation }) => {
     const [uid, setuid] = useState("");
     const [cambiarOjo, setCambiarOjo] = useState(false);
     const [cambiarOjo2, setCambiarOjo2] = useState(false);
+    const [Uid, setUid] = useState();
     
     const [hasErrorusuario, sethasErrorusuario] = useState(false)
     const [hasErrorcedula, sethasErrorcedula] = useState(false)
@@ -81,17 +83,26 @@ export const Registrar = ({ navigation }) => {
 
     }
 
-    const crearUsuario = () => {
-        CrearUsuario(correo, clave);
-
+    const crearUser = async () => {
+        await CrearUsuario(correo, clave,setUser);
         console.log("uiID", global.userId)
-        guardarUSuario({
+        console.log("uiID2", uid)
+       await guardarUSuario({
             name: usuario,
             cedula: cedula,
             correo: correo,
             clave: clave,
             identificacion: global.userId
         });
+
+    }
+
+
+    
+    const crearUsuario = () => {
+        crearUser();
+        console.log("User---------------------", user)
+      
         navigation.navigate("LoginNav");
 
     }

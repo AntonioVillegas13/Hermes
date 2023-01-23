@@ -3,14 +3,17 @@
 import { View, Text, Alert, StyleSheet, TouchableHighlight } from "react-native"
 import { Button, Icon } from '@rneui/base';
 import { useState } from "react";
-import { cerrarSesion } from "../../Services/AutenticacionSrv";
+import { cerrarSesion, RecuperarUsuario } from "../../Services/AutenticacionSrv";
 import { Ingresar } from "../../Services/AutenticacionSrv";
 import { Image, Input } from '@rneui/themed';
 import StyledText from '../../theme/StyledText';
 import { HelperText, TextInput } from 'react-native-paper';
 import theme from '../../theme/theme'
 import { validateEmail } from "../../commons/validations";
+import { PedidoContext } from "../../context/PedidosContext"; 
+import { useContext } from 'react';
 export const LoginForm = ({ navigation }) => {
+    const {user,setUser}=useContext(PedidoContext);
     const [usuario, setUsuario] = useState();
     const [contraseña, setcontraseña] = useState();
     const [errorCorreo, setErrorCorreo] = useState();
@@ -48,17 +51,16 @@ export const LoginForm = ({ navigation }) => {
 
 
 
+   
 
 
 
 
 
-
-
-
-    const ValidarLogin = () => {
+    const ValidarLogin = async() => {
         validaciones()
-        Ingresar(usuario, contraseña);
+       
+        await Ingresar(usuario, contraseña);
 
         // Alert.alert("Vlaidando")
 
