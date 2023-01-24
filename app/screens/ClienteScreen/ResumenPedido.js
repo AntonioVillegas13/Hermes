@@ -6,11 +6,17 @@ import { enviarPedidos } from "../../Services/ProductosSrv";
 import theme from "../../theme/theme";
 import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
+import StyledText from "../../Components/StyledText";
+import Header from "../../Components/Header";
+import { RadioButton } from "react-native-paper";
+import PedidoCard from "../../Components/PedidoCard";
 
 export const ResumenPedido = ({ navigation }) => {
-    const {user,setUser}=useContext(PedidoContext);
+    const { user, setUser } = useContext(PedidoContext);
+    const [txtEstado, setTxtEstado] = useState("");
+
     let Total = 0
-    const [tolta,setToral]=useState();
+    const [tolta, setToral] = useState();
     useEffect(() => {
 
 
@@ -26,6 +32,8 @@ export const ResumenPedido = ({ navigation }) => {
                 let subTotal = element.precio * element.cantidad
                 Total = Total + subTotal;
                 console.log("sum", subTotal)
+                console.log(element.estado)
+
             });
 
             console.log("tOTAL", Total)
@@ -45,7 +53,8 @@ export const ResumenPedido = ({ navigation }) => {
         let pedido = {
             total: tolta,
             productosArray: resumen,
-            codigo:user
+            codigo: user,
+            estados:txtEstado
         }
         console.log("UID:", global.userIdLogin)
 
@@ -94,24 +103,119 @@ export const ResumenPedido = ({ navigation }) => {
     return (
 
 
-        <View style={styles.container}>
-            <FlatList
-                data={resumen}
+        <View style={styles.container2}>
+            <Header back={() => navigation?.goBack()} />
+            <StyledText title bold center>Resumen de pedido</StyledText >
 
-                renderItem={(e) => {
 
-                    return <ItemPedido
-                        indice={e.index}
-                        prod={e.item}
+
+
+
+
+
+
+
+
+
+
+
+            <View style={{ alignItems: 'baseline', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ justifyContent: 'center', flexDirection: 'row' }} >
+                    <RadioButton
+                        value="first"
+                        status={txtEstado === 'true' ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setTxtEstado('true')
+                            console.log(txtEstado)
+                        }}
+                        color="red"
                     />
-                }}
+                    <StyledText body margin >Urgente</StyledText>
+                </View>
+                <View style={{ justifyContent: 'center', flexDirection: 'row' }} >
+
+                    <RadioButton
+                        value="second"
+                        status={txtEstado === 'false' ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setTxtEstado('false')
+                            console.log(txtEstado)
+
+                        }}
+                    />
+                    <StyledText body margin  >Normal</StyledText>
+                </View>
+
+            </View>
+
+            <View style={styles.container} >
+                <View style={styles.cajaCuerpo}>
+
+
+                    <StyledText subtitle bold white margin >Productos </StyledText>
+
+
+                </View>
 
 
 
 
-                keyExtractor={item => item.codigo}
 
-            />
+
+
+                <FlatList
+                    data={
+                        resumen
+                    }
+                    renderItem={({ item, index }) => {
+                        // //console.log("ordersListStock-------item------",item)
+                        return (
+                            <PedidoCard
+                                pedido={item}
+                            />
+                        );
+                    }}
+                    keyExtractor={(item, index) => {
+                        return index;
+                    }}
+                />
+
+            </View>
+
+            <View style={styles.container} >
+
+
+
+
+
+                <View style={styles.cajaCuerpo}>
+
+
+                    <StyledText subtitle bold white margin >Resumen </StyledText>
+
+
+                </View>
+
+
+
+                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                    <StyledText body  >TOTAL:</StyledText>
+                    <StyledText body >{tolta}</StyledText>
+                </View>
+
+                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                    <StyledText body >TOTAL:</StyledText>
+                    <StyledText body >{tolta}</StyledText>
+                </View>
+
+            </View>
+
+
+
+
+
+
+
 
 
             <Text>TOTAL:{tolta}</Text>
@@ -121,7 +225,7 @@ export const ResumenPedido = ({ navigation }) => {
 
                 <Button
                     title='Enviar Pedido'
-                    onPress={()=>{
+                    onPress={() => {
                         enviarDatos();
                     }}
                     buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
@@ -148,9 +252,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffff',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
+        shadowColor: "black",
+        margin: 20
 
+    }, container2: {
+        flex: 1,
+        backgroundColor: '#fff1',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start'
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
@@ -162,10 +273,9 @@ const styles = StyleSheet.create({
 
     },
     cajaCuerpo: {
-        //backgroundColor: 'brown',
-        flex: 6,
+        backgroundColor: theme.colors.jade,
+
         alignItems: 'stretch',
-        paddingHorizontal: 30,
         justifyContent: 'center',
     },
     titulo: {

@@ -2,13 +2,14 @@ import { Button, Input, Icon } from "@rneui/base"
 import { useEffect, useState } from "react"
 import { View, StyleSheet, Text, Dimensions } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
-import { TextInput } from 'react-native-paper';
+import { TextInput, RadioButton } from 'react-native-paper';
 import { Image } from '@rneui/themed';
 import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
 import { consultarProducto } from "../../Services/ProductosSrv";
 
 import theme from '../../theme/theme'
 import { set } from "react-native-reanimated";
+import StyledText from "../../Components/StyledText";
 
 global.ResumenPedido = [];
 export const ArmarPedido = ({ navigation }) => {
@@ -27,16 +28,16 @@ export const ArmarPedido = ({ navigation }) => {
         const willFocusSubscription = navigation.addListener("focus", () => {
             cargarProducto();
         });
-        
+
         return willFocusSubscription;
-      
+
     }, [])
     // useEffect(() => {
     //     setTxtCod(selectedItem?.precio)
     // }, [selectedItem])
 
 
-    const cargarProducto = async() => {
+    const cargarProducto = async () => {
         await consultarProducto();
         let response = Productos
         let lista = []
@@ -112,6 +113,8 @@ export const ArmarPedido = ({ navigation }) => {
                 }}
 
             />
+           
+
 
             {/* <Text>{selectedItem?.precio}</Text> */}
             <TextInput
@@ -225,6 +228,7 @@ export const ArmarPedido = ({ navigation }) => {
                     if (txPrecioComp != null && txtCod != null && txtCategoria != null && txPrecioComp != null) {
 
                         ArmarPed();
+
 
                     }
                 }}
