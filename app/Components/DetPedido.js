@@ -76,13 +76,17 @@ export const TarjetaDetallePedidos = (props) => {
 
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                     <StyledText body  >TOTAL:</StyledText>
+                    <StyledText body >{ObjPedido.subTotal}</StyledText>
+                </View>
+                <View style={styles.itemsResumen}>
+                    <StyledText body >Monto por envio urgente:</StyledText>
+                    <StyledText body >{ObjPedido.extra}</StyledText>
+                </View>
+                <View style={styles.itemsResumen}>
+                    <StyledText body >Total:</StyledText>
                     <StyledText body >{ObjPedido.total}</StyledText>
                 </View>
-
-                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                    <StyledText body >TOTAL:</StyledText>
-                    <StyledText body >{ObjPedido.total}</StyledText>
-                </View>
+                
 
             </View>
         </ScrollView  >
@@ -93,6 +97,11 @@ export const TarjetaDetallePedidos = (props) => {
 
 }
 const styles = StyleSheet.create({
+    itemsResumen: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        padding:4
+    },
     container: {
         flex: 1,
         backgroundColor: '#ffff',

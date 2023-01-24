@@ -10,13 +10,15 @@ import StyledText from "../../Components/StyledText";
 import Header from "../../Components/Header";
 import { RadioButton } from "react-native-paper";
 import PedidoCard from "../../Components/PedidoCard";
+import uuid from 'react-native-uuid';
+
 
 export const ResumenPedido = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
     const [txtEstado, setTxtEstado] = useState('false');
     const [txtExtra, settxtExtra] = useState(0);
 
-    
+
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
 
@@ -65,11 +67,15 @@ export const ResumenPedido = ({ navigation }) => {
 
 
     const enviarDatos = () => {
+        let ID=uuid.v4();
         let pedido = {
-            total: tolta,
+            total: total,
             productosArray: resumen,
             codigo: user,
-            estados: txtEstado
+            estados: txtEstado,
+            id:ID,
+            subTotal:tolta,
+            extra:txtExtra
         }
         console.log("UID:", global.userIdLogin)
 
@@ -144,7 +150,7 @@ export const ResumenPedido = ({ navigation }) => {
                             console.log(txtEstado)
                             if (txtEstado) {
                                 settxtExtra((tolta * 0.20))
-                                settotal(txtExtra + tolta)
+                                settotal((tolta * 0.20) + tolta)
 
                             } else {
                                 settotal(tolta)
@@ -164,6 +170,8 @@ export const ResumenPedido = ({ navigation }) => {
                         onPress={() => {
                             setTxtEstado('false')
                             console.log(txtEstado)
+                            settotal(tolta)
+
                             settxtExtra(0)
 
                         }}
@@ -216,16 +224,16 @@ export const ResumenPedido = ({ navigation }) => {
                 <View style={styles.cajaCuerpo2}>
                     <StyledText subtitle bold white margin >Resumen </StyledText>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                <View style={styles.itemsResumen}>
                     <StyledText body  >Subtotal:</StyledText>
                     <StyledText body >{tolta}</StyledText>
                 </View>
 
-                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                <View style={styles.itemsResumen}>
                     <StyledText body >Monto por envio urgente:</StyledText>
                     <StyledText body >{txtExtra}</StyledText>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                <View style={styles.itemsResumen}>
                     <StyledText body >Total:</StyledText>
                     <StyledText body >{total}</StyledText>
                 </View>
@@ -270,6 +278,11 @@ export const ResumenPedido = ({ navigation }) => {
 
 
 const styles = StyleSheet.create({
+    itemsResumen: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        padding:4
+    },
     container: {
         flex: 1,
         backgroundColor: '#ffff',
@@ -295,13 +308,12 @@ const styles = StyleSheet.create({
     },
     cajaCuerpo: {
         backgroundColor: theme.colors.jade,
-        flex: 10,
         alignItems: 'stretch',
         justifyContent: 'center',
     },
     cajaCuerpo2: {
         backgroundColor: theme.colors.jade,
-        flex:2,
+        flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
     },
