@@ -32,7 +32,7 @@ export default function PedidoCard({
 
           <View style={styles.botton}>
             
-           
+          
 
             <View style={[styles.data, styles.cantidad]}>
               <StyledText center bold>

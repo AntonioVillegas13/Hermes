@@ -21,7 +21,7 @@ export const ResumenPedido = ({ navigation }) => {
 
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
-
+    
     useEffect(() => {
 
 
@@ -80,7 +80,15 @@ export const ResumenPedido = ({ navigation }) => {
         console.log("UID:", global.userIdLogin)
 
         console.log("elemento enviado", pedido)
-        enviarPedidos(pedido)
+        enviarPedidos(pedido);
+        global.ResumenPedido=[]
+        setToral(0)
+        settotal(0)
+        settxtExtra(0)
+
+        navigation.navigate("TabListaPedidos")
+
+
     }
 
 

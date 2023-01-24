@@ -182,64 +182,11 @@ const ArmarPedidoTab = () => {
 
 }
 
-const DetallePedidoNav = () => {
-  return <DetalleStack.Navigator>
-    <DetalleStack.Screen
-      name="detallepedido"
-      options={{
-        headerShown: false
-      }}
-      component={DetallePedido} />
-  </DetalleStack.Navigator>
-}
 
 
 
 
-const TabNav = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="TabContenidoA"
-        component={ContenidoA}
-        options={{
-          title: "Productos"
-        }}
-      />
-      <Tab.Screen
-        name="TabPedidos"
-        component={Pedidos}
-        options={{
-          title: "Pedidos"
-        }}
-      />
-      <Tab.Screen
-        name="TabContenidoB"
-        component={Contenidob}
-        options={{
-          title: "Productos",
-          tabBarLabel: "Acerca De",
-          tabBarIcon: ({ size, tintColor }) => {
-            return (
-              < Icon
-                name="tool"
-                size={size}
-                color={tintColor}
-                type='ant-design'
-              />
-            )
-          }
-        }}
-      />
-      <Tab.Screen
-        name="ProductosNav"
-        options={{
-          headerShown: false
-        }}
-        component={ProductoNav} />
-    </Tab.Navigator>
-  )
-}
+
 
 const LoginNav = () => {
   return <LoginStack.Navigator>
