@@ -13,10 +13,10 @@ import PedidoCard from "../../Components/PedidoCard";
 
 export const ResumenPedido = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
-    const [txtEstado, setTxtEstado] = useState("false");
-    const [txtExtra, settxtExtra] = useState("");
+    const [txtEstado, setTxtEstado] = useState('false');
+    const [txtExtra, settxtExtra] = useState(0);
 
-    let Total = 0
+    
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
 
@@ -25,6 +25,7 @@ export const ResumenPedido = ({ navigation }) => {
 
 
         const willFocusSubscription = navigation.addListener("focus", () => {
+            let Total = 0
             console.log("UID:", global.userIdLogin)
             setTxtEstado("false")
             resumen
@@ -41,11 +42,14 @@ export const ResumenPedido = ({ navigation }) => {
 
             console.log("tOTAL", Total)
             setToral(Total);
+            console.log("---------------ESTADO", txtEstado)
 
-            if (txtEstado) {
-                settxtExtra(Total + (Total * 0.20))
-                settotal(txtExtra + Total)
-            } else {
+            if (txtEstado === "true") {
+                settxtExtra((Total * 0.20))
+                settotal((Total * 0.20) + Total)
+            } else if (txtEstado === "false") {
+                settotal(Total)
+                setToral(Total);
                 settxtExtra(0)
 
             }
@@ -209,16 +213,9 @@ export const ResumenPedido = ({ navigation }) => {
 
 
 
-                <View style={styles.cajaCuerpo}>
-
-
+                <View style={styles.cajaCuerpo2}>
                     <StyledText subtitle bold white margin >Resumen </StyledText>
-
-
                 </View>
-
-
-
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                     <StyledText body  >Subtotal:</StyledText>
                     <StyledText body >{tolta}</StyledText>
@@ -243,7 +240,6 @@ export const ResumenPedido = ({ navigation }) => {
 
 
 
-            <Text>TOTAL:{tolta}</Text>
 
 
             <View style={styles.cajaBotones}>
@@ -299,7 +295,13 @@ const styles = StyleSheet.create({
     },
     cajaCuerpo: {
         backgroundColor: theme.colors.jade,
-
+        flex: 10,
+        alignItems: 'stretch',
+        justifyContent: 'center',
+    },
+    cajaCuerpo2: {
+        backgroundColor: theme.colors.jade,
+        flex:2,
         alignItems: 'stretch',
         justifyContent: 'center',
     },
