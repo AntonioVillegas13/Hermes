@@ -13,17 +13,20 @@ import PedidoCard from "../../Components/PedidoCard";
 
 export const ResumenPedido = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
-    const [txtEstado, setTxtEstado] = useState("");
+    const [txtEstado, setTxtEstado] = useState("false");
+    const [txtExtra, settxtExtra] = useState("");
 
     let Total = 0
     const [tolta, setToral] = useState();
+    const [total, settotal] = useState();
+
     useEffect(() => {
 
 
 
         const willFocusSubscription = navigation.addListener("focus", () => {
             console.log("UID:", global.userIdLogin)
-
+            setTxtEstado("false")
             resumen
             console.log((global.ResumenPedido));
             const productos = global.ResumenPedido
@@ -37,7 +40,15 @@ export const ResumenPedido = ({ navigation }) => {
             });
 
             console.log("tOTAL", Total)
-            setToral(Total)
+            setToral(Total);
+
+            if (txtEstado) {
+                settxtExtra(Total + (Total * 0.20))
+                settotal(txtExtra + Total)
+            } else {
+                settxtExtra(0)
+
+            }
 
         });
         return willFocusSubscription;
@@ -54,7 +65,7 @@ export const ResumenPedido = ({ navigation }) => {
             total: tolta,
             productosArray: resumen,
             codigo: user,
-            estados:txtEstado
+            estados: txtEstado
         }
         console.log("UID:", global.userIdLogin)
 
@@ -127,6 +138,15 @@ export const ResumenPedido = ({ navigation }) => {
                         onPress={() => {
                             setTxtEstado('true')
                             console.log(txtEstado)
+                            if (txtEstado) {
+                                settxtExtra((tolta * 0.20))
+                                settotal(txtExtra + tolta)
+
+                            } else {
+                                settotal(tolta)
+                                settxtExtra(0)
+
+                            }
                         }}
                         color="red"
                     />
@@ -140,6 +160,7 @@ export const ResumenPedido = ({ navigation }) => {
                         onPress={() => {
                             setTxtEstado('false')
                             console.log(txtEstado)
+                            settxtExtra(0)
 
                         }}
                     />
@@ -199,13 +220,17 @@ export const ResumenPedido = ({ navigation }) => {
 
 
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                    <StyledText body  >TOTAL:</StyledText>
+                    <StyledText body  >Subtotal:</StyledText>
                     <StyledText body >{tolta}</StyledText>
                 </View>
 
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-                    <StyledText body >TOTAL:</StyledText>
-                    <StyledText body >{tolta}</StyledText>
+                    <StyledText body >Monto por envio urgente:</StyledText>
+                    <StyledText body >{txtExtra}</StyledText>
+                </View>
+                <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                    <StyledText body >Total:</StyledText>
+                    <StyledText body >{total}</StyledText>
                 </View>
 
             </View>
