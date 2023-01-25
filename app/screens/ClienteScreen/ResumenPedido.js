@@ -11,25 +11,27 @@ import Header from "../../Components/Header";
 import { RadioButton } from "react-native-paper";
 import PedidoCard from "../../Components/PedidoCard";
 import uuid from 'react-native-uuid';
+import { RecuperarUsuarioFire } from "../../Services/AdminSrv";
 
 
 export const ResumenPedido = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
     const [txtEstado, setTxtEstado] = useState('false');
     const [txtExtra, settxtExtra] = useState(0);
-
+    const [ObjUsuario, setObjUsuario] = useState(0);
 
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
-    
+
     useEffect(() => {
 
-
+        RecuperarUsuarioFire(user,setObjUsuario)
+        console.log("Objeto Usuiaro",ObjUsuario)
+        setTxtEstado("false")
 
         const willFocusSubscription = navigation.addListener("focus", () => {
             let Total = 0
-            console.log("UID:", global.userIdLogin)
-            setTxtEstado("false")
+            
             resumen
             console.log((global.ResumenPedido));
             const productos = global.ResumenPedido
@@ -67,21 +69,25 @@ export const ResumenPedido = ({ navigation }) => {
 
 
     const enviarDatos = () => {
-        let ID=uuid.v4();
+        let ID = uuid.v4();
         let pedido = {
             total: total,
             productosArray: resumen,
             codigo: user,
             estados: txtEstado,
-            id:ID,
-            subTotal:tolta,
-            extra:txtExtra
+            id: ID,
+            subTotal: tolta,
+            extra: txtExtra,
+            cedulaUsuario:ObjUsuario.cedula,
+            nombre:ObjUsuario.name,
+            correo:ObjUsuario.correo,
+            cedula:ObjUsuario.cedula
         }
         console.log("UID:", global.userIdLogin)
 
         console.log("elemento enviado", pedido)
         enviarPedidos(pedido);
-        global.ResumenPedido=[]
+        global.ResumenPedido = []
         setToral(0)
         settotal(0)
         settxtExtra(0)
@@ -289,7 +295,7 @@ const styles = StyleSheet.create({
     itemsResumen: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        padding:4
+        padding: 4
     },
     container: {
         flex: 1,

@@ -76,7 +76,7 @@ export const Registrar = ({ navigation }) => {
         
         if(hasErrorconfirmacion &&hasErrorclave &&hasErrorcorreo&&hasErrorcedula&&hasErrorusuario){
             Alert.alert("no se creo")
-            return null;ss
+            return null;
         }else{
             crearUsuario();
         }
