@@ -21,7 +21,7 @@ export const consultarPedidosGenerales = async (fnsetPedidos) => {
 export const  RecuperarUsuarioFire=async(Id,FnSetUser)=>{
     console.log("global--------------------------------",Id);
     // const productoRef = collection(global.dbCon, "Pedidos");
-    const productoRef= doc(global.dbCon,"Usuarios",Id)
+    const productoRef= doc(global.dbCon,"UsuarioComun",Id)
 
     const SnapCliente = await getDoc(productoRef);
     console.log(Id)

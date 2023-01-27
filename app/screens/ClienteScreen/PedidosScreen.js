@@ -8,6 +8,7 @@ import theme from "../../theme/theme";
 import { TarjetaPedidos } from "../../Components/Pedidos";
 import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
+import Header from "../../Components/Header";
 export const ListaPedidosFinal = ({ navigation }) => {
     const {user,setUser}=useContext(PedidoContext);
     const[uid2,setUid]=useState("3");
@@ -59,6 +60,8 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
 
     return <View style={styles.container}>
+                    <Header  />
+
         <View style={styles.cajaCabecera} >
 
             <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
@@ -180,7 +183,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginBottom: 50,
-        paddingTop:100,
+        paddingTop:10,
     },
     cajaCuerpo: {
         // backgroundColor: 'brown',

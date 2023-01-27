@@ -13,7 +13,7 @@ export const TarjetaPedidos = (props) => {
 
             <ScrollView style={styles.impar} >
                 <TouchableHighlight onPress={() => {
-                    console.log("prod----------------------------------", prod.codigo)
+                    console.log("prod----------------------------------", prod.id)
                     props.navegar.navigate('detallePedido', { id: prod.id })
                 }}>
                     <View style={{ margin: 10 }}>

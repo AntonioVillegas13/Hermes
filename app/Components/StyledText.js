@@ -60,11 +60,19 @@ const styles = StyleSheet.create({
   margin:{
     marginHorizontal :10,
     marginVertical:5
+  },
+  fondoColorRojo:{
+    backgroundColor:"#E03116"
+  },
+  fondoColorVerde:{
+    backgroundColor:"#0DF062"
   }
 });
 const StyledText = ({
   children,
   color,
+  fondoColorRojo,
+  fondoColorVerde,
   margin,
   light,
   softbold,
@@ -86,6 +94,8 @@ const StyledText = ({
 }) => {
   const textStyle = [
     styles.text,
+    fondoColorVerde && styles.fondoColorVerde,
+    fondoColorRojo&& styles.fondoColorRojo,
     margin && styles.margin,
     white && styles.white,
     body && styles.body,

@@ -8,10 +8,10 @@ import StyledText from "./StyledText";
 export const TarjetaDetallePedidos = (props) => {
 
     const Pedido = props.item;
-    const ObjPedido = props.objPedido
+    const ObjPedido = props.objPedido;
 
     useEffect(() => {
-        console.log("PEDIDO", Pedido);
+        console.log("PEDIDO", ObjPedido);
     }, [])
 
 
@@ -24,7 +24,9 @@ export const TarjetaDetallePedidos = (props) => {
 
         <ScrollView >
 
-
+            <View style={{ alignItems: "center" }}>
+                {ObjPedido.estados == "true" ? <StyledText subtitle bold margin fondoColorVerde white>Pedido Regular</StyledText> : <StyledText subtitle fondoColorRojo bold white margin >Pedido Ugente</StyledText>}
+            </View>
             <View style={styles.container} >
 
 
@@ -47,9 +49,11 @@ export const TarjetaDetallePedidos = (props) => {
                     renderItem={({ item, index }) => {
                         // //console.log("ordersListStock-------item------",item)
                         return (
-                            <PedidoCard
-                                pedido={item}
-                            />
+                            <ScrollView>
+                                <PedidoCard
+                                    pedido={item}
+                                />
+                            </ScrollView>
                         );
                     }}
                     keyExtractor={(item, index) => {
@@ -76,17 +80,17 @@ export const TarjetaDetallePedidos = (props) => {
 
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                     <StyledText body  >TOTAL:</StyledText>
-                    <StyledText body >{ObjPedido.subTotal}</StyledText>
+                    <StyledText body >${ObjPedido.subTotal}</StyledText>
                 </View>
                 <View style={styles.itemsResumen}>
                     <StyledText body >Monto por envio urgente:</StyledText>
-                    <StyledText body >{ObjPedido.extra}</StyledText>
+                    <StyledText body >${ObjPedido.extra}</StyledText>
                 </View>
                 <View style={styles.itemsResumen}>
                     <StyledText body >Total:</StyledText>
-                    <StyledText body >{ObjPedido.total}</StyledText>
+                    <StyledText body >${ObjPedido.total}</StyledText>
                 </View>
-                
+
 
             </View>
         </ScrollView  >
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     itemsResumen: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        padding:4
+        padding: 4
     },
     container: {
         flex: 1,
