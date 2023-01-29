@@ -40,6 +40,53 @@ export const consultar = async (fnsetPedidos,Id) => {
 
 }
 
+export const consultarProcesado = async (fnsetPedidos,Id) => {
+    
+    console.log("global--------------------------------",Id);
+    // const productoRef = collection(global.dbCon, "Pedidos");
+    const productoRef= query(collection(global.dbCon, "Pedidos"), where("codigo", "==",Id), where("StatusPedido", "==", true));
+    const SnapPedidos = await getDocs(productoRef);
+    let PedidoArray = []
+    await SnapPedidos.forEach((documento) => {
+        console.log("doc", documento.data());
+       
+            console.log("doce-------------------", documento.data());
+            PedidoArray.push(documento.data());
+        
+
+
+
+    });
+
+    fnsetPedidos(PedidoArray)
+    console.log("pediFunc2", PedidoArray);
+
+}
+
+
+export const consultarNoProcesado = async (fnsetPedidos,Id) => {
+    
+    console.log("global--------------------------------",Id);
+    // const productoRef = collection(global.dbCon, "Pedidos");
+    const productoRef= query(collection(global.dbCon, "Pedidos"), where("codigo", "==",Id), where("StatusPedido", "==", false));
+
+    const SnapPedidos = await getDocs(productoRef);
+    let PedidoArray = []
+    await SnapPedidos.forEach((documento) => {
+        console.log("doc", documento.data());
+       
+            console.log("doce-------------------", documento.data());
+            PedidoArray.push(documento.data());
+        
+
+
+
+    });
+
+    fnsetPedidos(PedidoArray)
+    console.log("pediFunc2", PedidoArray);
+
+}
 
 export const consultarProducto = async () => {
     //console.log("globla",global.dbCon);

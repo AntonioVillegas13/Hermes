@@ -70,7 +70,8 @@ export const ArmarPedido = ({ navigation }) => {
             categoria: selectedItem?.Category,
             precio: selectedItem?.price,
             cantidad: txtCantidad,
-            peso:selectedItem?.weigth
+            peso:selectedItem?.weigth,
+            
         }
 
         ResumenPedido.push(ProductoAux)

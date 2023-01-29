@@ -24,7 +24,8 @@ import { ResumenPedido } from './app/screens/ClienteScreen/ResumenPedido';
 import { AdminPedidos } from './app/screens/AdministradorScreen/AdminPedidosScreen'
 import theme from './app/theme/theme';
 import { DetallePedido } from './app/screens/ClienteScreen/DetallePedido';
-
+import { ListaPedidosNoProcesados } from './app/screens/TiposPedidoScreen/PedidosNoProcesadosScreen';
+import { ListaPedidosProcesados } from './app/screens/TiposPedidoScreen/PedidosProcesadosScreen';
 import { useContext } from 'react';
 
 
@@ -68,6 +69,22 @@ const ClientesTab = () => {
 
       }}
     />
+      <Stack.Screen
+      name="ListaPedidosProcesados"
+      component={ListaPedidosProcesados}
+      options={{
+        title: "Pedidos",
+
+      }}
+    />
+      <Stack.Screen
+      name="ListaPedidosNoProcesados"
+      component={ListaPedidosNoProcesados}
+      options={{
+        title: "Pedidos",
+
+      }}
+    />
 
   </Stack.Navigator>
 
@@ -75,50 +92,50 @@ const ClientesTab = () => {
 
 
 }
-const Administrador = () => {
-  return <Tab.Navigator screenOptions={({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
-      let iconName;
+// const Administrador = () => {
+//   return <Tab.Navigator screenOptions={({ route }) => ({
+//     tabBarIcon: ({ focused, color, size }) => {
+//       let iconName;
 
-      if (route.name === 'TabArmarPedido1') {
-        iconName = "pencil-square-o"
-      } else if (route.name === 'TabPedidosAdmin') {
-        iconName = "shopping-cart";
-      }
+//       if (route.name === 'TabArmarPedido1') {
+//         iconName = "pencil-square-o"
+//       } else if (route.name === 'TabPedidosAdmin') {
+//         iconName = "shopping-cart";
+//       }
 
-      // You can return any component that you like here!
-      return <Icon name={iconName} size={size} color={color} type='font-awesome' />;
-    },
-    tabBarActiveTintColor: theme.colors.morado,
-    tabBarInactiveTintColor: 'gray',
-    tabBarStyle: {
-      // position: 'absolute',
-      backgroundColor: "#FBFBFF",
-      height: 60,
-    },
-    tabBarHideOnKeyboard: true,
-    headerShown: false,
-    // tabBarShowLabel: false,
-  })}
-
-
-  >
-    <Tab.Screen
-      name="TabPedidosAdmin"
-      component={AdminPedidos}
-      options={{
-        title: "PedidosAdminstrador"
-
-      }}
-    />
+//       // You can return any component that you like here!
+//       return <Icon name={iconName} size={size} color={color} type='font-awesome' />;
+//     },
+//     tabBarActiveTintColor: theme.colors.morado,
+//     tabBarInactiveTintColor: 'gray',
+//     tabBarStyle: {
+//       // position: 'absolute',
+//       backgroundColor: "#FBFBFF",
+//       height: 60,
+//     },
+//     tabBarHideOnKeyboard: true,
+//     headerShown: false,
+//     // tabBarShowLabel: false,
+//   })}
 
 
+//   >
+//     <Tab.Screen
+//       name="TabPedidosAdmin"
+//       component={AdminPedidos}
+//       options={{
+//         title: "PedidosAdminstrador"
 
-  </Tab.Navigator>
+//       }}
+//     />
 
 
 
-}
+//   </Tab.Navigator>
+
+
+
+// }
 
 
 const ArmarPedidoTab = () => {

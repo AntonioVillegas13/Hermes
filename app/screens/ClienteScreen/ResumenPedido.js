@@ -81,7 +81,8 @@ export const ResumenPedido = ({ navigation }) => {
             cedulaUsuario:ObjUsuario.cedula,
             nombre:ObjUsuario.name,
             correo:ObjUsuario.correo,
-            cedula:ObjUsuario.cedula
+            cedula:ObjUsuario.cedula,
+            StatusPedido:false
         }
         console.log("UID:", global.userIdLogin)
 
