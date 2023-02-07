@@ -1,6 +1,6 @@
 
 
-import { View, Text, Alert, StyleSheet, TouchableHighlight, Modal, Pressable } from "react-native"
+import { View, Text, Alert, StyleSheet, TouchableHighlight, Modal, Pressable, Dimensions } from "react-native"
 import { Button, Icon } from '@rneui/base';
 import { useState } from "react";
 import { cerrarSesion, RecuperarUsuario } from "../../Services/AutenticacionSrv";
@@ -13,6 +13,8 @@ import { validateEmail } from "../../commons/validations";
 import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
 import StyledInput from '../../Components/StyledInput'
+import Logotipo from "../../../assets/HermesLogo.png";
+
 export const LoginForm = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
     const [usuario, setUsuario] = useState();
@@ -22,23 +24,37 @@ export const LoginForm = ({ navigation }) => {
     const [hasErrorcorreo, sethasErrorcorreo] = useState(false)
     const [hasErrorcontraseña, sethasErrorcontraseña] = useState();
     const [cambiarOjo, setCambiarOjo] = useState(false);
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-    const contraseñaRegex = /^(?=.*[A-Z])(?=.*[1-9])[A-Za-z0-9]{1,10}$/;
+    const contraseñaRegex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
     const validaciones = () => {
         if (contraseña == null || contraseña == "") {
             sethasErrorcontraseña(true)
             setErrorPassword("ingrese una contraseña")
+            setModalVisible(true);
 
         } else {
 
             sethasErrorcontraseña(false)
+            setModalVisible(true);
+
+            if (!contraseñaRegex.test(contraseña)) {
+                setErrorPassword("Contraseña no valida \nIntente  nuevamente \nRecuerde que debe tener 1 Mayúscula  y 1 número");
+                sethasErrorcontraseña(true)
+                setModalVisible(true);
+
+
+            } else {
+                setErrorCorreo("Ingrese un correo")
+                sethasErrorcorreo(false)
+            }
+
+
         }
         if (usuario == null || usuario == "") {
             sethasErrorcorreo(true)
             setErrorCorreo("Ingrese un correo")
-            setModalVisible(true);
 
         } else {
 
@@ -46,8 +62,10 @@ export const LoginForm = ({ navigation }) => {
 
 
             if (!emailRegex.test(usuario)) {
-                setErrorCorreo("Invalid email");
+                setErrorCorreo("Correo no valido \n Intente  nuevamente");
                 sethasErrorcorreo(true)
+                setModalVisible(true);
+
 
             } else {
                 setErrorCorreo("Ingrese un correo")
@@ -94,11 +112,22 @@ export const LoginForm = ({ navigation }) => {
             }}>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Text style={styles.modalText}>{errorCorreo}</Text>
+                    <Image
+                        style={[
+                            styles.logo,
+                            {
+                                height: 100,
+                                width: Dimensions.get("window").width,
+                            },
+                        ]}
+                        source={Logotipo}
+                    />
+                    {hasErrorcorreo ? <Text style={styles.modalText}>{errorCorreo}</Text> : hasErrorcontraseña ? <Text style={styles.modalText}>{errorPassword}</Text> : <Text>nada</Text>}
+
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
                         onPress={() => setModalVisible(!modalVisible)}>
-                        <Text style={styles.textStyle}>Hide Modal</Text>
+                        <Text style={styles.textStyle}>Cerrar</Text>
                     </Pressable>
                 </View>
             </View>
@@ -251,8 +280,10 @@ const styles = StyleSheet.create({
     modalView: {
         backgroundColor: 'white',
         borderRadius: 20,
-        paddingTop:"5%",
-        padding: "20%",
+        paddingTop: "5%",
+        paddingHorizontal: "20%",
+        justifyContent: "space-around",
+        paddingBottom: "5%",
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -282,6 +313,9 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
-    },
+    }, logo: {
+        marginVertical: 20,
+        resizeMode: "center",
+    }
 
 });

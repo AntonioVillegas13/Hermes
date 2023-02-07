@@ -18,7 +18,7 @@ export const ResumenPedido = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
     const [txtEstado, setTxtEstado] = useState('false');
     const [txtExtra, settxtExtra] = useState(0);
-    const [ObjUsuario, setObjUsuario] = useState(0);
+    const [ObjUsuario, setObjUsuario] = useState();
 
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
@@ -26,7 +26,7 @@ export const ResumenPedido = ({ navigation }) => {
     useEffect(() => {
 
         RecuperarUsuarioFire(user,setObjUsuario)
-        console.log("Objeto Usuiaro",ObjUsuario)
+        console.log("----------------------------------Objeto Usuiaro",ObjUsuario)
         setTxtEstado("false")
 
         const willFocusSubscription = navigation.addListener("focus", () => {
