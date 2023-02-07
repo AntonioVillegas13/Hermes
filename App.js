@@ -27,6 +27,7 @@ import { DetallePedido } from './app/screens/ClienteScreen/DetallePedido';
 import { ListaPedidosNoProcesados } from './app/screens/TiposPedidoScreen/PedidosNoProcesadosScreen';
 import { ListaPedidosProcesados } from './app/screens/TiposPedidoScreen/PedidosProcesadosScreen';
 import { useContext } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
 
 
 const Stack = createNativeStackNavigator();
@@ -69,7 +70,7 @@ const ClientesTab = () => {
 
       }}
     />
-      <Stack.Screen
+    <Stack.Screen
       name="ListaPedidosProcesados"
       component={ListaPedidosProcesados}
       options={{
@@ -77,7 +78,7 @@ const ClientesTab = () => {
 
       }}
     />
-      <Stack.Screen
+    <Stack.Screen
       name="ListaPedidosNoProcesados"
       component={ListaPedidosNoProcesados}
       options={{
@@ -254,7 +255,19 @@ const ProductoNav = () => {
 
 }
 
+const verficarFire = async (fnSetLogin, id) => {
 
+  const docRef = doc(global.dbCon, "UsuarioComun", id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    fnSetLogin(true);
+    console.log("Document data:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+
+}
 
 
 export default function App() {
@@ -262,8 +275,8 @@ export default function App() {
     productos: []
   }
   const [Login, setlogin] = useState(false);
-  const[user,setUser]=useState();
-  const registarObserver = async() => {
+  const [user, setUser] = useState();
+  const registarObserver = async () => {
     const auth = getAuth();
     if (!global.DesSuscribirObserver) {
       global.DesSuscribirObserver = await onAuthStateChanged(auth, (user) => {
@@ -274,7 +287,7 @@ export default function App() {
           const uid = user.uid;
           setUser(uid)
           console.log("Observer Cambia !!!!a sing in1")
-          setlogin(true);
+          verficarFire(setlogin,uid)
           console.log("L,", Login)
           // ...
         } else {
@@ -294,7 +307,7 @@ export default function App() {
 
   return (
 
-    <PedidoContext.Provider value={{user,setUser}} >
+    <PedidoContext.Provider value={{ user, setUser }} >
       <NavigationContainer>
         {Login ? <ClientesTab /> : <LoginNav />}
         {/* //Administrador ClientesTab */}

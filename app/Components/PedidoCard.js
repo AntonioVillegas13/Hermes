@@ -12,9 +12,10 @@ export default function PedidoCard({
 
   return (
     <View style={styles.card}>
+    
       <View style={styles.top}>
 
-        <StyledText  bold subtitle2>
+        <StyledText bold subtitle2>
           {pedido?.nombre}
         </StyledText>
 
@@ -31,8 +32,13 @@ export default function PedidoCard({
         <View style={styles.left}>
 
           <View style={styles.botton}>
-            
-          
+          <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: pedido.url,
+        }}
+      />
+
 
             <View style={[styles.data, styles.cantidad]}>
               <StyledText center bold>
@@ -50,7 +56,7 @@ export default function PedidoCard({
 
           </View>
         </View>
-       
+
       </View>
     </View>
   );
@@ -95,5 +101,8 @@ const styles = StyleSheet.create({
   },
   cantidad: {
     flex: 3,
-  },
+  }, tinyLogo: {
+    width: 50,
+    height: 50,
+  }
 });

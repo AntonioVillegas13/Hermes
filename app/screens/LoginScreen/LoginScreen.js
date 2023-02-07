@@ -1,6 +1,6 @@
 
 
-import { View, Text, Alert, StyleSheet, TouchableHighlight } from "react-native"
+import { View, Text, Alert, StyleSheet, TouchableHighlight, Modal, Pressable } from "react-native"
 import { Button, Icon } from '@rneui/base';
 import { useState } from "react";
 import { cerrarSesion, RecuperarUsuario } from "../../Services/AutenticacionSrv";
@@ -10,10 +10,11 @@ import StyledText from '../../theme/StyledText';
 import { HelperText, TextInput } from 'react-native-paper';
 import theme from '../../theme/theme'
 import { validateEmail } from "../../commons/validations";
-import { PedidoContext } from "../../context/PedidosContext"; 
+import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
+import StyledInput from '../../Components/StyledInput'
 export const LoginForm = ({ navigation }) => {
-    const {user,setUser}=useContext(PedidoContext);
+    const { user, setUser } = useContext(PedidoContext);
     const [usuario, setUsuario] = useState();
     const [contraseña, setcontraseña] = useState();
     const [errorCorreo, setErrorCorreo] = useState();
@@ -21,7 +22,10 @@ export const LoginForm = ({ navigation }) => {
     const [hasErrorcorreo, sethasErrorcorreo] = useState(false)
     const [hasErrorcontraseña, sethasErrorcontraseña] = useState();
     const [cambiarOjo, setCambiarOjo] = useState(false);
+    const [modalVisible, setModalVisible] = useState(true);
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
+    const contraseñaRegex = /^(?=.*[A-Z])(?=.*[1-9])[A-Za-z0-9]{1,10}$/;
     const validaciones = () => {
         if (contraseña == null || contraseña == "") {
             sethasErrorcontraseña(true)
@@ -34,10 +38,22 @@ export const LoginForm = ({ navigation }) => {
         if (usuario == null || usuario == "") {
             sethasErrorcorreo(true)
             setErrorCorreo("Ingrese un correo")
+            setModalVisible(true);
 
         } else {
 
             sethasErrorcorreo(false)
+
+
+            if (!emailRegex.test(usuario)) {
+                setErrorCorreo("Invalid email");
+                sethasErrorcorreo(true)
+
+            } else {
+                setErrorCorreo("Ingrese un correo")
+                sethasErrorcorreo(false)
+            }
+
 
         }
 
@@ -51,15 +67,15 @@ export const LoginForm = ({ navigation }) => {
 
 
 
-   
 
 
 
 
 
-    const ValidarLogin = async() => {
+
+    const ValidarLogin = async () => {
         validaciones()
-       
+
         await Ingresar(usuario, contraseña);
 
         // Alert.alert("Vlaidando")
@@ -68,6 +84,26 @@ export const LoginForm = ({ navigation }) => {
     }
 
     return <View style={styles.container}>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>{errorCorreo}</Text>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Hide Modal</Text>
+                    </Pressable>
+                </View>
+            </View>
+        </Modal>
+
         <View style={styles.cajaCabecera}>
             <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
         </View>
@@ -78,6 +114,7 @@ export const LoginForm = ({ navigation }) => {
                 value={usuario}
                 onChangeText={setUsuario}
                 mode="outlined"
+                maxLength={50}
 
 
             />
@@ -93,7 +130,7 @@ export const LoginForm = ({ navigation }) => {
                 secureTextEntry={cambiarOjo}
                 right={
                     cambiarOjo ? <TextInput.Icon icon="eye"
-                        
+
                         onPress={() => {
                             setCambiarOjo(!cambiarOjo);
                             return false;
@@ -203,6 +240,48 @@ const styles = StyleSheet.create({
         top: -11,
         left: 10,
         marginLeft: 11,
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: "10%",
+        // backgroundColor: 'red',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingTop:"5%",
+        padding: "20%",
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
 
 });

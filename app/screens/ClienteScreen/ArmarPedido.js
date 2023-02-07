@@ -10,7 +10,7 @@ import { consultarProducto } from "../../Services/ProductosSrv";
 import theme from '../../theme/theme'
 import { set } from "react-native-reanimated";
 import StyledText from "../../Components/StyledText";
-
+import StyledInput from '../../Components/StyledInput'
 global.ResumenPedido = [];
 export const ArmarPedido = ({ navigation }) => {
 
@@ -70,8 +70,9 @@ export const ArmarPedido = ({ navigation }) => {
             categoria: selectedItem?.Category,
             precio: selectedItem?.price,
             cantidad: txtCantidad,
-            peso:selectedItem?.weigth,
-            
+            peso: selectedItem?.weigth,
+            url: selectedItem?.url
+
         }
 
         ResumenPedido.push(ProductoAux)
@@ -115,7 +116,7 @@ export const ArmarPedido = ({ navigation }) => {
                 }}
 
             />
-           
+
 
 
             {/* <Text>{selectedItem?.precio}</Text> */}
@@ -138,6 +139,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
+                maxLength={50}
                 value={selectedItem?.title}
                 label='Nombre'
                 editable={false}
@@ -157,6 +159,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
+            maxLength={50}
                 value={selectedItem?.Category}
                 label='Categoria'
                 onChangeText={setTxtCategoria}
@@ -176,6 +179,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
+            maxLength={10}
                 value={selectedItem?.price}
                 label='Precio'
                 editable={false}
@@ -196,6 +200,7 @@ export const ArmarPedido = ({ navigation }) => {
             />
 
             <TextInput
+            maxLength={10}
                 value={txtCantidad}
                 label='Cantidad'
                 onChangeText={(e) => {

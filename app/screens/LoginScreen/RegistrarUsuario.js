@@ -6,6 +6,7 @@ import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
 import { guardarUSuario } from "../../Services/Usuarios";
 import theme from '../../theme/theme'
+import StyledInput from '../../Components/StyledInput'
 import { PedidoContext } from "../../context/PedidosContext";
 export const Registrar = ({ navigation }) => {
     const {user,setUser}=useContext(PedidoContext);

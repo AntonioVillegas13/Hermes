@@ -6,7 +6,7 @@ import { ResetContraseña } from "../../Services/AutenticacionSrv";
 import { TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
 import theme from "../../theme/theme";
-
+import StyledInput from '../../Components/StyledInput'
 
 export const ReseteoForm = ({ navigation }) => {
 
