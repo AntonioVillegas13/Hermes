@@ -99,6 +99,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
                 title='Cerrar Sesion'
                 color={theme.colors.jade}
                 onPress={Cerrar}
+                style={{padding:30}}
 
             />
         </View>
@@ -201,17 +202,16 @@ const styles = StyleSheet.create({
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
-        flex: 1,
+        
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginBottom: 50,
         paddingTop: 10,
     },
     cajaCuerpo: {
         // backgroundColor: 'brown',
-        flex: 5,
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
+        flex: 4,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
     },
     titulo: {
         fontSize: 16,
@@ -219,10 +219,10 @@ const styles = StyleSheet.create({
         paddingBottom: 39
     },
     cajaBotones: {
-        //backgroundColor: 'red',
-        paddingBottom: 10,
+        //sbackgroundColor: 'red',
+        paddingBottom: 80,
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-end',
         flex: 1
     }
 

@@ -25,7 +25,7 @@ export const TarjetaDetallePedidos = (props) => {
         <ScrollView >
 
             <View style={{ alignItems: "center" }}>
-                {ObjPedido.estados == "true" ? <StyledText subtitle bold margin fondoColorVerde white>Pedido Regular</StyledText> : <StyledText subtitle fondoColorRojo bold white margin >Pedido Ugente</StyledText>}
+                {ObjPedido.estados == "false" ? <StyledText subtitle bold margin fondoColorVerde white>Pedido Regular</StyledText> : <StyledText subtitle fondoColorRojo bold white margin >Pedido Urgente</StyledText>}
             </View>
             <View style={styles.container} >
 

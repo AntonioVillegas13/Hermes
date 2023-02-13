@@ -1,7 +1,7 @@
 import { Button } from "@rneui/base";
 import { useEffect, useState } from "react";
-import { Alert } from "react-native";
-import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight } from "react-native"
+import { Alert, Dimensions, Pressable } from "react-native";
+import { View, StyleSheet, Text, FlatList, ScrollView, TouchableHighlight, Modal } from "react-native"
 import { enviarPedidos } from "../../Services/ProductosSrv";
 import theme from "../../theme/theme";
 import { PedidoContext } from "../../context/PedidosContext";
@@ -12,6 +12,8 @@ import { RadioButton } from "react-native-paper";
 import PedidoCard from "../../Components/PedidoCard";
 import uuid from 'react-native-uuid';
 import { RecuperarUsuarioFire } from "../../Services/AdminSrv";
+import { Image, Input } from '@rneui/themed';
+import Logotipo from "../../../assets/HermesLogo.png";
 
 
 export const ResumenPedido = ({ navigation }) => {
@@ -22,16 +24,18 @@ export const ResumenPedido = ({ navigation }) => {
 
     const [tolta, setToral] = useState();
     const [total, settotal] = useState();
+    const [modalVisible, setModalVisible] = useState(false);
+
 
     useEffect(() => {
 
-        RecuperarUsuarioFire(user,setObjUsuario)
-        console.log("----------------------------------Objeto Usuiaro",ObjUsuario)
+        RecuperarUsuarioFire(user, setObjUsuario)
+        console.log("----------------------------------Objeto Usuiaro", ObjUsuario)
         setTxtEstado("false")
 
         const willFocusSubscription = navigation.addListener("focus", () => {
             let Total = 0
-            
+
             resumen
             console.log((global.ResumenPedido));
             const productos = global.ResumenPedido
@@ -49,7 +53,11 @@ export const ResumenPedido = ({ navigation }) => {
             console.log("---------------ESTADO", txtEstado)
 
             if (txtEstado === "true") {
-                settxtExtra((Total * 0.20))
+                let valEx = (Total * 0.20)
+                valEx = Math.round(valEx)
+                console.log("-============================VALEXT",valEx    ,'color: red')
+                settxtExtra(valEx)
+
                 settotal((Total * 0.20) + Total)
             } else if (txtEstado === "false") {
                 settotal(Total)
@@ -70,6 +78,7 @@ export const ResumenPedido = ({ navigation }) => {
 
     const enviarDatos = () => {
         let ID = uuid.v4();
+        settxtExtra( parseFloat(txtExtra).toFixed(3))
         let pedido = {
             total: total,
             productosArray: resumen,
@@ -78,11 +87,11 @@ export const ResumenPedido = ({ navigation }) => {
             id: ID,
             subTotal: tolta,
             extra: txtExtra,
-            cedulaUsuario:ObjUsuario.cedula,
-            nombre:ObjUsuario.name,
-            correo:ObjUsuario.correo,
-            cedula:ObjUsuario.cedula,
-            StatusPedido:false
+            cedulaUsuario: ObjUsuario.cedula,
+            nombre: ObjUsuario.name,
+            correo: ObjUsuario.correo,
+            cedula: ObjUsuario.cedula,
+            StatusPedido: false
         }
         console.log("UID:", global.userIdLogin)
 
@@ -140,6 +149,39 @@ export const ResumenPedido = ({ navigation }) => {
 
 
         <View style={styles.container2}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setModalVisible(!modalVisible);
+                }}>
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Image
+                            style={[
+                                styles.logo,
+                                {
+                                    height: 100,
+                                    width: Dimensions.get("window").width,
+                                    padding: 40
+                                },
+                            ]}
+                            source={Logotipo}
+                        />
+
+                        <StyledText margin subheading>¿Esta seguro que desea enviar este pedido?</StyledText>
+                        <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={async() =>{
+                                await enviarDatos();
+                                await setModalVisible(!modalVisible)}}>
+
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
             <Header back={() => navigation?.goBack()} />
             <StyledText title bold center>Resumen de pedido</StyledText >
 
@@ -241,16 +283,16 @@ export const ResumenPedido = ({ navigation }) => {
                 </View>
                 <View style={styles.itemsResumen}>
                     <StyledText body  >Subtotal:</StyledText>
-                    <StyledText body >{tolta}</StyledText>
+                    <StyledText body >$ {tolta}</StyledText>
                 </View>
 
                 <View style={styles.itemsResumen}>
                     <StyledText body >Monto por envio urgente:</StyledText>
-                    <StyledText body >{txtExtra}</StyledText>
+                    <StyledText body >$ {parseFloat(txtExtra).toFixed(3)}</StyledText>
                 </View>
                 <View style={styles.itemsResumen}>
                     <StyledText body >Total:</StyledText>
-                    <StyledText body >{total}</StyledText>
+                    <StyledText body >$ {total}</StyledText>
                 </View>
 
             </View>
@@ -270,7 +312,8 @@ export const ResumenPedido = ({ navigation }) => {
                 <Button
                     title='Enviar Pedido'
                     onPress={() => {
-                        enviarDatos();
+                        
+                        setModalVisible(true);
                     }}
                     buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
                     containerStyle={{
@@ -361,6 +404,54 @@ const styles = StyleSheet.create({
         left: 10,
         marginLeft: 11,
     },
-
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        // alignItems: 'center',
+        marginTop: "10%",
+        marginHorizontal:"5%"
+        // backgroundColor: 'red',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingTop: "5%",
+        // width:Dimensions.get("window").width-30,
+        paddingHorizontal: "20%",
+        justifyContent: "space-around",
+        paddingBottom: "5%",
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    }, logo: {
+        marginVertical: 20,
+        resizeMode: "center",
+    }
 
 });

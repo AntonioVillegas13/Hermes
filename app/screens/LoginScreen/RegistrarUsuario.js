@@ -1,15 +1,19 @@
 import { Button, Input, Icon } from "@rneui/base"
 import { useContext, useState } from "react"
-import { View, StyleSheet, Text, Alert } from "react-native"
+import { View, StyleSheet, Text, Alert, Dimensions, Pressable } from "react-native"
 import { CrearUsuario } from "../../Services/AutenticacionSrv"
-import { TextInput } from 'react-native-paper';
+import { HelperText, Modal, TextInput } from 'react-native-paper';
 import { Image } from '@rneui/themed';
 import { guardarUSuario } from "../../Services/Usuarios";
 import theme from '../../theme/theme'
 import StyledInput from '../../Components/StyledInput'
 import { PedidoContext } from "../../context/PedidosContext";
+import Logotipo from "../../../assets/HermesLogo.png";
+import StyledText from "../../Components/StyledText";
+
+
 export const Registrar = ({ navigation }) => {
-    const {user,setUser}=useContext(PedidoContext);
+    const { user, setUser } = useContext(PedidoContext);
     const [usuario, setUsuario] = useState();
     const [cedula, setCedula] = useState();
     const [correo, setCorreo] = useState();
@@ -19,13 +23,14 @@ export const Registrar = ({ navigation }) => {
     const [cambiarOjo, setCambiarOjo] = useState(false);
     const [cambiarOjo2, setCambiarOjo2] = useState(false);
     const [Uid, setUid] = useState();
-    
+
     const [hasErrorusuario, sethasErrorusuario] = useState(false)
     const [hasErrorcedula, sethasErrorcedula] = useState(false)
     const [hasErrorcorreo, sethasErrorcorreo] = useState(false)
     const [hasErrorclave, sethasErrorclave] = useState(false)
     const [hasErrorconfirmacion, sethasErrorconfirmacion] = useState(false)
-    
+    const [modalVisible, setModalVisible] = useState(true);
+
     const [mensajeUsuario, setmensajeusuario] = useState("")
     const [mensajeCedula, setmensajecedula] = useState("")
     const [mensajeCorreo, setmensajecorreo] = useState("")
@@ -37,7 +42,7 @@ export const Registrar = ({ navigation }) => {
         if (usuario == null || usuario == "") {
             sethasErrorusuario(true)
             setmensajeusuario("Ingrese un nombre")
-
+            
         } else {
             sethasErrorusuario(false)
 
@@ -46,7 +51,7 @@ export const Registrar = ({ navigation }) => {
         if (cedula == null || cedula == "") {
             sethasErrorcedula(true)
             setmensajecedula("Ingrese una contraseña")
-            
+
         } else {
             sethasErrorcedula(false)
 
@@ -72,23 +77,52 @@ export const Registrar = ({ navigation }) => {
 
         } else {
             sethasErrorclave(false)
+            if (clave == confirmar) {
+                console.log("COINCIDEN SIGUE ADELANTE VIAJERO")
+               
+                crearUsuario();
+                setModalVisible(true)
+                sethasErrorclave(false)
+            } else {
+                console.log("NO COINCIDEN")
+                sethasErrorclave(true)
+                sethasErrorconfirmacion(true)
+                setmensajeclave("Contraseña No Coincide")
+                setmensajeconfirmacion("Contraseña No Coincide")
 
+            }
         }
-        
-        if(hasErrorconfirmacion &&hasErrorclave &&hasErrorcorreo&&hasErrorcedula&&hasErrorusuario){
+
+        if (hasErrorconfirmacion && hasErrorclave && hasErrorcorreo && hasErrorcedula && hasErrorusuario) {
             Alert.alert("no se creo")
             return null;
-        }else{
-            crearUsuario();
+        } else {
+
+            if (clave == confirmar) {
+                console.log("COINCIDEN SIGUE ADELANTE VIAJERO")
+               
+                crearUsuario();
+                setModalVisible(true)
+                sethasErrorclave(false)
+            } else {
+                console.log("NO COINCIDEN")
+                sethasErrorclave(true)
+                sethasErrorconfirmacion(true)
+                setmensajeclave("Contraseña No Coincide")
+                setmensajeconfirmacion("Contraseña No Coincide")
+
+            }
+
         }
 
     }
 
     const crearUser = async () => {
-        await CrearUsuario(correo, clave,setUser);
+
+        await CrearUsuario(correo, clave, setUser);
         console.log("uiID", global.userId)
         console.log("uiID2", uid)
-       await guardarUSuario({
+        await guardarUSuario({
             name: usuario,
             cedula: cedula,
             correo: correo,
@@ -96,27 +130,36 @@ export const Registrar = ({ navigation }) => {
             identificacion: global.userId
         });
 
+
+
+
     }
 
 
-    
+
     const crearUsuario = () => {
+
+
+
         crearUser();
         console.log("User---------------------", user)
-      
+
         navigation.navigate("LoginNav");
 
     }
 
 
 
-    return <View style={styles.container}>
+    return <View style={styles.centeredView}>
+      
 
-        <View style={styles.cajaCabecera} >
+        <View style={styles.cajaCabecera}>
             <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
-            <Text style={{ fontSize: 20 }}>Registrar Usuario</Text>
+            {/* <Text style={{ fontSize: 20 }}>Registrar Usuario</Text> */}
+            <StyledText  center   bold    secondTitle >Registrar Usuario</StyledText>
         </View>
-        <View style={styles.cajaCuerpo} >
+        <View style={styles.cajaCuerpo}>
+
             <TextInput
                 value={cedula}
                 label='Cedula'
@@ -134,6 +177,9 @@ export const Registrar = ({ navigation }) => {
                 }
 
             />
+              <HelperText type="error" visible={hasErrorcedula}>
+                {mensajeCedula}
+            </HelperText>
             <TextInput
                 value={usuario}
                 label='Nombre'
@@ -151,6 +197,9 @@ export const Registrar = ({ navigation }) => {
                 }
 
             />
+              <HelperText type="error" visible={hasErrorusuario}>
+                {mensajeUsuario}
+            </HelperText>
             <TextInput
                 value={correo}
                 label='Correo Electronico'
@@ -168,6 +217,9 @@ export const Registrar = ({ navigation }) => {
                 }
 
             />
+              <HelperText type="error" visible={hasErrorcorreo}>
+                {mensajeCorreo}
+            </HelperText>
             <TextInput
                 value={clave}
                 label='Contraseña'
@@ -189,6 +241,9 @@ export const Registrar = ({ navigation }) => {
                 }
 
             />
+             <HelperText type="error" visible={hasErrorclave}>
+                {mensajeclave}
+            </HelperText>
 
             <TextInput
                 value={confirmar}
@@ -210,15 +265,12 @@ export const Registrar = ({ navigation }) => {
                             }} />
                 }
             />
-
+            <HelperText type="error" visible={hasErrorconfirmacion}>
+                {mensajeConfirmacion}
+            </HelperText>
         </View>
-
-
-
-
-
-
         <View style={styles.cajaBotones}>
+
             <Button
                 title='Crear Usuario'
                 onPress={validaciones}
@@ -228,9 +280,9 @@ export const Registrar = ({ navigation }) => {
                     paddingTop: 40
                 }}
             />
+
+
         </View>
-
-
 
     </View>
 }
@@ -244,22 +296,22 @@ export const Registrar = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffff',
+        // backgroundColor: "blue",
+        // backgroundColor: '#ffff',
         //alignItems: 'center',
         justifyContent: 'center',
         padding: 10
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 100,
-        marginBottom: 50
+        padding: 20
     },
     cajaCuerpo: {
-        //backgroundColor: 'brown',
-        flex: 6,
+        // backgroundColor: 'brown',
+        flex: 3,
         alignItems: 'stretch',
         paddingHorizontal: 30,
         justifyContent: 'flex-start',
@@ -270,7 +322,7 @@ const styles = StyleSheet.create({
         paddingBottom: 39
     },
     cajaBotones: {
-        paddingBottom: 10,
+        paddingTop: 130,
         alignItems: 'center',
         justifyContent: 'flex-start',
         flex: 2
@@ -291,6 +343,53 @@ const styles = StyleSheet.create({
         top: -11,
         left: 10,
         marginLeft: 11,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        // alignItems: 'center',
+        marginTop: "10%",
+        // backgroundColor: 'red',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingTop: "5%",
+        paddingHorizontal: "20%",
+        justifyContent: "space-around",
+        paddingBottom: "5%",
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    }, logo: {
+        marginVertical: 20,
+        resizeMode: "center",
     }
 
 });

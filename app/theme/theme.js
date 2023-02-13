@@ -13,6 +13,7 @@ const theme ={
         body:15,
         title:40,
         subtitle:25,
+        subheading:22
     }, 
     fonts:{
         main:'System'

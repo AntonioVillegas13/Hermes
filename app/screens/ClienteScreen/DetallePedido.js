@@ -33,6 +33,7 @@ export const DetallePedido = ({ route, navigation }) => {
         <View>
             <Header back={() => navigation?.goBack()} />
             <StyledText title bold center>Resumen de pedido</StyledText >
+            <StyledText>{ObjPedido.id}</StyledText>
             <ScrollView>
                 <TarjetaDetallePedidos
                     item={id}

@@ -25,7 +25,7 @@ export const RecuperarUsuario= async(fnsetId)=>{
   });
 
 }
-export const Ingresar = async(email, password) => {
+export const Ingresar = async(email, password,setErrorEStado,setErrorMessage) => {
   const auth = getAuth();
  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -35,11 +35,16 @@ export const Ingresar = async(email, password) => {
       //global.userIdLogin = user.uid
       // fnsetId(user.uid)
       // ...
+      setErrorEStado(false)
     })
     .catch((error) => {
+      setErrorEStado(true)
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage)
+      if(errorMessage=="Firebase: Error (auth/wrong-password)."){
+      setErrorMessage("Contraseña invalida")
+    }
     });
 
 }

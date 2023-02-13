@@ -127,6 +127,7 @@ export const ArmarPedido = ({ navigation }) => {
                 keyboardType="numeric"
                 editable={false}
                 mode="outlined"
+                textColor="gray"
                 lefIcon={
                     <Icon
                         name="user"
@@ -147,6 +148,7 @@ export const ArmarPedido = ({ navigation }) => {
                 onChangeText={setTxtNomP}
                 KeyboardType="email-address"
                 mode="outlined"
+                textColor="gray"
                 lefIcon={
                     <Icon
                         name="user"
@@ -164,7 +166,7 @@ export const ArmarPedido = ({ navigation }) => {
                 label='Categoria'
                 onChangeText={setTxtCategoria}
                 editable={false}
-
+                textColor="gray"
                 KeyboardType="email-address"
                 mode="outlined"
                 lefIcon={
@@ -183,7 +185,7 @@ export const ArmarPedido = ({ navigation }) => {
                 value={selectedItem?.price}
                 label='Precio'
                 editable={false}
-
+                textColor="gray"
                 onChangeText={setTxtPrecioComp}
                 KeyboardType="email-address"
                 mode="outlined"
@@ -203,6 +205,7 @@ export const ArmarPedido = ({ navigation }) => {
             maxLength={10}
                 value={txtCantidad}
                 label='Cantidad'
+                
                 onChangeText={(e) => {
                     console.log("")
                     setTxtCantidad(e)

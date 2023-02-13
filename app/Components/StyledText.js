@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   small: {
     fontSize: theme.fontSize.small,
   },
+  secondTitle:{
+    fontSize: 24,
+  },
   title: {
     fontSize: theme.fontSize.title,
   },
@@ -74,6 +77,7 @@ const StyledText = ({
   fondoColorRojo,
   fondoColorVerde,
   margin,
+  secondTitle,
   light,
   softbold,
   small,
@@ -94,6 +98,7 @@ const StyledText = ({
 }) => {
   const textStyle = [
     styles.text,
+    secondTitle && styles.secondTitle,
     fondoColorVerde && styles.fondoColorVerde,
     fondoColorRojo&& styles.fondoColorRojo,
     margin && styles.margin,

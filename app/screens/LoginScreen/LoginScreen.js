@@ -6,7 +6,7 @@ import { useState } from "react";
 import { cerrarSesion, RecuperarUsuario } from "../../Services/AutenticacionSrv";
 import { Ingresar } from "../../Services/AutenticacionSrv";
 import { Image, Input } from '@rneui/themed';
-import StyledText from '../../theme/StyledText';
+import StyledText from "../../Components/StyledText";
 import { HelperText, TextInput } from 'react-native-paper';
 import theme from '../../theme/theme'
 import { validateEmail } from "../../commons/validations";
@@ -14,6 +14,7 @@ import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
 import StyledInput from '../../Components/StyledInput'
 import Logotipo from "../../../assets/HermesLogo.png";
+import { KeyboardAvoidingView } from "react-native"
 
 export const LoginForm = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
@@ -25,10 +26,19 @@ export const LoginForm = ({ navigation }) => {
     const [hasErrorcontraseña, sethasErrorcontraseña] = useState();
     const [cambiarOjo, setCambiarOjo] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const [hasErrorcontraseña2, sethasErrorcontraseña2] = useState(false);
+
+    const [contraseña2, setcontraseña2] = useState();
+
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     const contraseñaRegex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
-    const validaciones = () => {
+    const validaciones = async () => {
+        console.log("Entro a la validacion")
+        await Ingresar(usuario, contraseña, sethasErrorcontraseña2, setcontraseña2);
+        console.log("Estado MENSAJE eRROR",hasErrorcontraseña2)
+        console.log("Mensaje ERROR",contraseña2)
+
         if (contraseña == null || contraseña == "") {
             sethasErrorcontraseña(true)
             setErrorPassword("ingrese una contraseña")
@@ -94,14 +104,19 @@ export const LoginForm = ({ navigation }) => {
     const ValidarLogin = async () => {
         validaciones()
 
-        await Ingresar(usuario, contraseña);
 
         // Alert.alert("Vlaidando")
 
 
     }
 
-    return <View style={styles.container}>
+    return (<KeyboardAvoidingView
+        style={styles.centeredView}
+        behavior='height'
+        keyboardVerticalOffset={100}>
+
+
+
         <Modal
             animationType="slide"
             transparent={true}
@@ -118,23 +133,24 @@ export const LoginForm = ({ navigation }) => {
                             {
                                 height: 100,
                                 width: Dimensions.get("window").width,
+                                padding: 40
                             },
                         ]}
                         source={Logotipo}
                     />
-                    {hasErrorcorreo ? <Text style={styles.modalText}>{errorCorreo}</Text> : hasErrorcontraseña ? <Text style={styles.modalText}>{errorPassword}</Text> : <Text>nada</Text>}
+                    {hasErrorcorreo ? <StyledText subtitle >{errorCorreo}</StyledText> : hasErrorcontraseña ? <StyledText subtitle >{errorPassword}</StyledText> :hasErrorcontraseña2  ?  <StyledText subtitle >{contraseña2}</StyledText>:<StyledText subtitle >Ingreso Exitoso</StyledText>}
 
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
                         onPress={() => setModalVisible(!modalVisible)}>
-                        <Text style={styles.textStyle}>Cerrar</Text>
+                        {hasErrorcorreo ? <StyledText white body>Cerrar</StyledText> : hasErrorcontraseña ? <StyledText body white >Cerrar</StyledText> : hasErrorcontraseña2 ?<StyledText body white >Cerrar</StyledText>: <StyledText body white >Continuar</StyledText>}
                     </Pressable>
                 </View>
             </View>
         </Modal>
 
         <View style={styles.cajaCabecera}>
-            <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 400, height: 160 }} />
+            <Image source={require('../../../assets/HermesLogo.png')} style={{ width: 500, height: 160, margin: 30, resizeMode: 'contain' }} />
         </View>
         <View style={styles.cajaCuerpo}>
 
@@ -215,7 +231,8 @@ export const LoginForm = ({ navigation }) => {
 
         </View>
 
-    </View>
+
+    </KeyboardAvoidingView>);
 }
 
 
@@ -223,24 +240,26 @@ export const LoginForm = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffff',
+        backgroundColor: "blue",
+        // backgroundColor: '#ffff',
         //alignItems: 'center',
         justifyContent: 'center',
         padding: 10
     },
     cajaCabecera: {
-        //backgroundColor: 'cyan',
-        flex: 2,
+        // backgroundColor: 'cyan',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 100
+
     },
     cajaCuerpo: {
-        //backgroundColor: 'brown',
-        flex: 4,
+        // backgroundColor: 'brown',
+        flex: 2,
         alignItems: 'stretch',
-        paddingHorizontal: 30,
-        justifyContent: 'flex-start',
+        paddingHorizontal: 20,
+        justifyContent: 'flex-end',
+
     },
     titulo: {
         fontSize: 16,
@@ -248,10 +267,11 @@ const styles = StyleSheet.create({
         paddingBottom: 39
     },
     cajaBotones: {
-        paddingBottom: 10,
+        // backgroundColor:"black",
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        flex: 4
+        justifyContent: 'center',
+        flex: 2,
+        paddingBottom: 100
     },
     txtinput: {
         borderWidth: 1,
@@ -273,7 +293,7 @@ const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         marginTop: "10%",
         // backgroundColor: 'red',
     },
