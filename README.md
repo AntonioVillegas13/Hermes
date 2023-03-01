@@ -13,6 +13,9 @@ Para su instalacion solo basta descargarse la apk en el dispositivo móvil y cor
 <img src="https://user-images.githubusercontent.com/88470677/222257721-1a1bf2cb-9536-4c0b-a71e-f4c0e660a313.png" alt="JuveYell" width="100px">
 </p>
 </div>
+### Credenciales para pruebas
+#### usuario:anville7.24@gmail.com
+#### contraseña: Vitabrevis1
 
 ### El manual de usuario se encuentra en el siguiente enlace:
 https://youtu.be/DnjOKJyJs2w
