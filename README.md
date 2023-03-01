@@ -6,7 +6,7 @@ La presente aplicación móvil busca ser el modulo del usuario común para la ap
 - Módulo Resumen de pedido
 
 ## Instalación de APK's
-Dentro del repositorio se encuentras la respectiva apk de Administrador, esto ya que se diseño como una beta para el Hermes, y se busca tener todavia bajo reserva varios de los modulos hasta que se planifique un lanzamiento o beta abierta.
+Dentro del repositorio se encuentras la respectiva apk de Administrador, esto ya que se diseño como una beta para el sistema Hermes, y se busca tener todavia bajo reserva varios de los modulos hasta que se planifique un lanzamiento o beta abierta.
 Para su instalacion solo basta descargarse la apk en el dispositivo móvil y correr la apk, como se muestra en la siguiente imagen donde se ve la instalación.
 <div>
 <p style = 'text-align:center, margin:30'>
