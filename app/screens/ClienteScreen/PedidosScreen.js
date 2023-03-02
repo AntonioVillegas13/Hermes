@@ -9,19 +9,25 @@ import { TarjetaPedidos } from "../../Components/Pedidos";
 import { PedidoContext } from "../../context/PedidosContext";
 import { useContext } from 'react';
 import Header from "../../Components/Header";
+import StyledText from "../../Components/StyledText";
+import { recuperarUsuario2 } from "../../Services/Usuarios";
 export const ListaPedidosFinal = ({ navigation }) => {
     const { user, setUser } = useContext(PedidoContext);
     const [uid2, setUid] = useState("3");
     const [pedidos, setPedidos] = useState([]);
+    const[nombreUsuario,setNombreUsuario]=useState("");
     let pedidos2;
 
 
 
     useEffect(() => {
+        console.log("---------------------------------------")
 
+        recuperarUsuario2(user,setNombreUsuario);
 
+        console.log("-*-------/*--*-*-*-*",nombreUsuario.name)
         const willFocusSubscription = navigation.addListener("focus", () => {
-            recuperarUsuario();
+            
 
             recuperarProductos();
         });
@@ -58,13 +64,13 @@ export const ListaPedidosFinal = ({ navigation }) => {
 
 
     const NavegarPedidoProcesado = () => {
-       navigation.navigate("ListaPedidosProcesados")
+        navigation.navigate("ListaPedidosProcesados")
 
     }
 
     const NavegarPedidoNoProcesado = () => {
         navigation.navigate("ListaPedidosNoProcesados")
-     
+
     }
 
 
@@ -74,6 +80,8 @@ export const ListaPedidosFinal = ({ navigation }) => {
         <View style={styles.cajaCabecera} >
 
             <Text style={{ fontSize: theme.fontSize.title }}>PEDIDOS</Text>
+            <StyledText subheading bold>BIENVENIDO</StyledText>
+            <StyledText subheading light >{nombreUsuario.name}</StyledText>
         </View>
         <View style={styles.cajaCuerpo} >
 
@@ -99,7 +107,7 @@ export const ListaPedidosFinal = ({ navigation }) => {
                 title='Cerrar Sesion'
                 color={theme.colors.jade}
                 onPress={Cerrar}
-                style={{padding:30}}
+                style={{ padding: 30 }}
 
             />
         </View>
@@ -202,7 +210,7 @@ const styles = StyleSheet.create({
     },
     cajaCabecera: {
         //backgroundColor: 'cyan',
-        
+
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingTop: 10,

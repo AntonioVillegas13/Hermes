@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffff',
         alignItems: 'center',
         justifyContent: 'center',
-       
+
     },
     impar: {
 

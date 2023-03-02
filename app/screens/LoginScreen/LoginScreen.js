@@ -56,8 +56,8 @@ export const LoginForm = ({ navigation }) => {
 
 
             } else {
-                setErrorCorreo("Ingrese un correo")
-                sethasErrorcorreo(false)
+                
+                sethasErrorcontraseña(false)
             }
 
 

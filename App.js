@@ -184,7 +184,7 @@ const ArmarPedidoTab = () => {
       name="TabResumenPedidos"
       component={ResumenPedido}
       options={{
-        title: "resumenPedio"
+        title: "Resumen Pedido"
       }}
     />
 

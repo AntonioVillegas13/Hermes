@@ -55,7 +55,7 @@ export const ResumenPedido = ({ navigation }) => {
             if (txtEstado === "true") {
                 let valEx = (Total * 0.20)
                 valEx = Math.round(valEx)
-                console.log("-============================VALEXT",valEx    ,'color: red')
+                console.log("-============================VALEXT", valEx, 'color: red')
                 settxtExtra(valEx)
 
                 settotal((Total * 0.20) + Total)
@@ -78,7 +78,7 @@ export const ResumenPedido = ({ navigation }) => {
 
     const enviarDatos = () => {
         let ID = uuid.v4();
-        settxtExtra( parseFloat(txtExtra).toFixed(3))
+        settxtExtra(parseFloat(txtExtra).toFixed(3))
         let pedido = {
             total: total,
             productosArray: resumen,
@@ -151,10 +151,10 @@ export const ResumenPedido = ({ navigation }) => {
         <View style={styles.container2}>
             <Modal
                 animationType="slide"
-                transparent={true}
+                transparent={false}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
+                    Alert.alert('Pedido Cancelado.');
                     setModalVisible(!modalVisible);
                 }}>
                 <View style={styles.centeredView}>
@@ -172,16 +172,31 @@ export const ResumenPedido = ({ navigation }) => {
                         />
 
                         <StyledText margin subheading>¿Esta seguro que desea enviar este pedido?</StyledText>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={async() =>{
+                        <Button
+                            title='Enviar pedido'
+                            onPress={async () => {
                                 await enviarDatos();
-                                await setModalVisible(!modalVisible)}}>
+                                await setModalVisible(!modalVisible)
+                            }}
+                            buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
+                            containerStyle={{
+                                width: 200,
+                                paddingTop: 40
+                            }}
+                        />
 
-                        </Pressable>
+
                     </View>
                 </View>
             </Modal>
+
+
+
+
+
+
+
+
             <Header back={() => navigation?.goBack()} />
             <StyledText title bold center>Resumen de pedido</StyledText >
 
@@ -252,23 +267,26 @@ export const ResumenPedido = ({ navigation }) => {
 
 
 
+                <ScrollView >
+                    <FlatList
+                        data={
+                            resumen
+                        }
+                        renderItem={({ item, index }) => {
+                            // //console.log("ordersListStock-------item------",item)
+                            return (
+                                <PedidoCard
+                                    pedido={item}
+                                />
+                            );
+                        }}
+                        keyExtractor={(item, index) => {
+                            return index;
+                        }}
+                    />
+                </ScrollView>
 
-                <FlatList
-                    data={
-                        resumen
-                    }
-                    renderItem={({ item, index }) => {
-                        // //console.log("ordersListStock-------item------",item)
-                        return (
-                            <PedidoCard
-                                pedido={item}
-                            />
-                        );
-                    }}
-                    keyExtractor={(item, index) => {
-                        return index;
-                    }}
-                />
+
 
             </View>
 
@@ -312,7 +330,7 @@ export const ResumenPedido = ({ navigation }) => {
                 <Button
                     title='Enviar Pedido'
                     onPress={() => {
-                        
+
                         setModalVisible(true);
                     }}
                     buttonStyle={{ borderRadius: 10, backgroundColor: theme.colors.jade }}
@@ -406,16 +424,16 @@ const styles = StyleSheet.create({
     },
     centeredView: {
         flex: 1,
+        
         justifyContent: 'center',
         // alignItems: 'center',
-        marginTop: "10%",
-        marginHorizontal:"5%"
-        // backgroundColor: 'red',
+        backgroundColor: '#615E62',
     },
     modalView: {
         backgroundColor: 'white',
         borderRadius: 20,
         paddingTop: "5%",
+
         // width:Dimensions.get("window").width-30,
         paddingHorizontal: "20%",
         justifyContent: "space-around",

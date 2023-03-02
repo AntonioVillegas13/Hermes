@@ -11,18 +11,18 @@ import { useContext } from 'react';
 import Header from "../../Components/Header";
 
 export const ListaPedidosProcesados = ({ navigation }) => {
-    const {user,setUser}=useContext(PedidoContext);
-    const[uid2,setUid]=useState("3");
+    const { user, setUser } = useContext(PedidoContext);
+    const [uid2, setUid] = useState("3");
     const [pedidos, setPedidos] = useState([]);
     let pedidos2;
 
 
 
     useEffect(() => {
-        
-       
+
+
         const willFocusSubscription = navigation.addListener("focus", () => {
-        recuperarUsuario();
+            recuperarUsuario();
 
             recuperarProductos();
         });
@@ -30,28 +30,28 @@ export const ListaPedidosProcesados = ({ navigation }) => {
     }, [])
 
 
-    const recuperarProductos = async() => {
+    const recuperarProductos = async () => {
         console.log("------------------------- Recuperar Producto")
 
-        console.log("recupernado datos ",uid2)
-        await consultarProcesado(setPedidos,user);
+        console.log("recupernado datos ", uid2)
+        await consultarProcesado(setPedidos, user);
         //console.log("OED", pedidos);
         // console.log("Uid", global.userId )
         // pedidos2 = pedidos.filter(item => item.codigo === "hX4gT8sDdRPCO5N6qt5mykIUa9g2")
 
-      
+
 
 
     }
 
-    const recuperarUsuario=async()=>{
+    const recuperarUsuario = async () => {
         console.log("------------------------- Recuperar Usuario")
 
         await RecuperarUsuario(setUser);
-        console.log("UID2:",user)
+        console.log("UID2:", user)
     }
 
-    const Cerrar=()=>{
+    const Cerrar = () => {
         cerrarSesion();
         setUser();
 
@@ -61,7 +61,7 @@ export const ListaPedidosProcesados = ({ navigation }) => {
 
 
     return <View style={styles.container}>
-                    <Header  />
+        <Header />
 
         <View style={styles.cajaCabecera} >
 
@@ -73,7 +73,7 @@ export const ListaPedidosProcesados = ({ navigation }) => {
             <TarjetaPedidos pedidos={pedidos} navegar={navigation} />
 
         </View>
-       
+
 
     </View>
 
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginBottom: 50,
-        paddingTop:10,
+        paddingTop: 10,
     },
     cajaCuerpo: {
         // backgroundColor: 'brown',

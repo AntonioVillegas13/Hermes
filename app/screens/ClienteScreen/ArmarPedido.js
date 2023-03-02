@@ -11,6 +11,7 @@ import theme from '../../theme/theme'
 import { set } from "react-native-reanimated";
 import StyledText from "../../Components/StyledText";
 import StyledInput from '../../Components/StyledInput'
+import Header from "../../Components/Header";
 global.ResumenPedido = [];
 export const ArmarPedido = ({ navigation }) => {
 
@@ -85,7 +86,7 @@ export const ArmarPedido = ({ navigation }) => {
 
 
     return <View style={styles.container}>
-
+        <Header />
         <View style={styles.cajaCabecera} >
 
             <Text style={{ fontSize: theme.fontSize.title }}>Pedido</Text>
@@ -161,7 +162,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-            maxLength={50}
+                maxLength={50}
                 value={selectedItem?.Category}
                 label='Categoria'
                 onChangeText={setTxtCategoria}
@@ -181,7 +182,7 @@ export const ArmarPedido = ({ navigation }) => {
 
             />
             <TextInput
-            maxLength={10}
+                maxLength={10}
                 value={selectedItem?.price}
                 label='Precio'
                 editable={false}
@@ -202,10 +203,10 @@ export const ArmarPedido = ({ navigation }) => {
             />
 
             <TextInput
-            maxLength={10}
+                maxLength={10}
                 value={txtCantidad}
                 label='Cantidad'
-                
+
                 onChangeText={(e) => {
                     console.log("")
                     setTxtCantidad(e)
@@ -274,8 +275,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 25,
-        paddingTop: 100,
+      
         marginBottom: 20
     },
     cajaCuerpo: {

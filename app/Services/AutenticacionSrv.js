@@ -1,23 +1,22 @@
-import { getAuth, signInWithEmailAndPassword,onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 
 // export const VerificarRol=(){
 //   const 
 // }
 
-export const RecuperarUsuario= async(fnsetId)=>{
+export const RecuperarUsuario = async (fnsetId) => {
   const auth = getAuth();
   await onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      console.log("-------------------------Funcion Recuperar Usuario")
+     
+      console.log("-------------------------Función Recuperar Usuario")
       const uid = user.uid;
 
-     
-      console.log("UID",uid)
+
+      console.log("UID", uid)
       fnsetId(uid)
-      // ...
+     
     } else {
       // User is signed out
       // ...
@@ -25,9 +24,9 @@ export const RecuperarUsuario= async(fnsetId)=>{
   });
 
 }
-export const Ingresar = async(email, password,setErrorEStado,setErrorMessage) => {
+export const Ingresar = async (email, password, setErrorEStado, setErrorMessage) => {
   const auth = getAuth();
- await signInWithEmailAndPassword(auth, email, password)
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
@@ -42,9 +41,9 @@ export const Ingresar = async(email, password,setErrorEStado,setErrorMessage) =>
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage)
-      if(errorMessage=="Firebase: Error (auth/wrong-password)."){
-      setErrorMessage("Contraseña invalida")
-    }
+      if (errorMessage == "Firebase: Error (auth/wrong-password).") {
+        setErrorMessage("Contraseña invalida")
+      }
     });
 
 }
@@ -65,24 +64,28 @@ export const cerrarSesion = () => {
 
 }
 
-export const CrearUsuario = async (email, password,SetUid) => {
+export const CrearUsuario = async (email, password, SetUid) => {
+  try {
+    const auth = getAuth();
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log("usuario Creado:", user.uid)
+        global.userId = user.uid
+        SetUid(useruid)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error al crear usuario:", errorMessage)
+        // ..
+      });
 
-  const auth = getAuth();
-  await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log("usuario Creado:", user.uid)
-      global.userId = user.uid
-      SetUid(useruid)
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("Error al crear usuario:", errorMessage)
-      // ..
-    });
+  } catch (error) {
+
+  }
 
 
 
