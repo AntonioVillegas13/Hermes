@@ -1,0 +1,210 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.anonymous.Hermes"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:4:3-75
+11-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:4:20-73
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:2:3-64
+12-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:2:20-62
+13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+13-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:3:3-77
+13-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:3:20-75
+14    <uses-permission android:name="android.permission.VIBRATE" />
+14-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:5:3-63
+14-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:5:20-61
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:6:3-78
+15-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:6:20-76
+16
+17    <queries>
+17-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:7:3-13:13
+18        <intent>
+18-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:8:5-12:14
+19            <action android:name="android.intent.action.VIEW" />
+19-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:9:7-58
+19-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:9:15-56
+20
+21            <category android:name="android.intent.category.BROWSABLE" />
+21-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:10:7-67
+21-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:10:17-65
+22
+23            <data android:scheme="https" />
+23-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:11:7-37
+23-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:11:13-35
+24        </intent>
+25        <!-- Query open documents -->
+26        <intent>
+26-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-19:18
+27            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+27-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-79
+27-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:21-76
+28        </intent>
+29    </queries>
+30
+31    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+31-->[com.facebook.flipper:flipper:0.125.0] C:\Users\USER\.gradle\caches\transforms-3\03f04a3f11198ce3b7c6cedb9b41266b\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:5-76
+31-->[com.facebook.flipper:flipper:0.125.0] C:\Users\USER\.gradle\caches\transforms-3\03f04a3f11198ce3b7c6cedb9b41266b\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:22-73
+32    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+32-->[com.android.installreferrer:installreferrer:1.0] C:\Users\USER\.gradle\caches\transforms-3\3cebdbab74ef22791b274b50aea559da\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+32-->[com.android.installreferrer:installreferrer:1.0] C:\Users\USER\.gradle\caches\transforms-3\3cebdbab74ef22791b274b50aea559da\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+33
+34    <application
+34-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:3-33:17
+35        android:name="com.anonymous.Hermes.MainApplication"
+35-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:16-47
+36        android:allowBackup="true"
+36-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:162-188
+37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+37-->[androidx.core:core:1.7.0] C:\Users\USER\.gradle\caches\transforms-3\63a3df243d2d102452600006144a86df\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+38        android:debuggable="true"
+39        android:icon="@mipmap/ic_launcher"
+39-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:81-115
+40        android:label="@string/app_name"
+40-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:48-80
+41        android:roundIcon="@mipmap/ic_launcher_round"
+41-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:116-161
+42        android:theme="@style/AppTheme"
+42-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:189-220
+43        android:usesCleartextTraffic="true" >
+43-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:14:221-256
+44        <meta-data
+44-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:15:5-82
+45            android:name="expo.modules.updates.ENABLED"
+45-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:15:16-59
+46            android:value="true" />
+46-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:15:60-80
+47        <meta-data
+47-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:16:5-93
+48            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+48-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:16:16-68
+49            android:value="47.0.0" />
+49-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:16:69-91
+50        <meta-data
+50-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:17:5-105
+51            android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH"
+51-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:17:16-80
+52            android:value="ALWAYS" />
+52-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:17:81-103
+53        <meta-data
+53-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:18:5-99
+54            android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS"
+54-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:18:16-79
+55            android:value="0" />
+55-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:18:80-97
+56        <meta-data
+56-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:19:5-126
+57            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+57-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:19:16-67
+58            android:value="https://exp.host/@antoniovillegas/Hermes" />
+58-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:19:68-124
+59
+60        <activity
+60-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:5-31:16
+61            android:name="com.anonymous.Hermes.MainActivity"
+61-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:15-43
+62            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+62-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:77-154
+63            android:exported="true"
+63-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:276-299
+64            android:label="@string/app_name"
+64-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:44-76
+65            android:launchMode="singleTask"
+65-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:155-186
+66            android:screenOrientation="portrait"
+66-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:300-336
+67            android:theme="@style/Theme.App.SplashScreen"
+67-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:230-275
+68            android:windowSoftInputMode="adjustResize" >
+68-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:20:187-229
+69            <intent-filter>
+69-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:21:7-24:23
+70                <action android:name="android.intent.action.MAIN" />
+70-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:22:9-60
+70-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:22:17-58
+71
+72                <category android:name="android.intent.category.LAUNCHER" />
+72-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:23:9-68
+72-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:23:19-66
+73            </intent-filter>
+74            <intent-filter>
+74-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:25:7-30:23
+75                <action android:name="android.intent.action.VIEW" />
+75-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:9:7-58
+75-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:9:15-56
+76
+77                <category android:name="android.intent.category.DEFAULT" />
+77-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:27:9-67
+77-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:27:19-65
+78                <category android:name="android.intent.category.BROWSABLE" />
+78-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:10:7-67
+78-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:10:17-65
+79
+80                <data android:scheme="com.anonymous.Hermes" />
+80-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:11:7-37
+80-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:11:13-35
+81            </intent-filter>
+82        </activity>
+83        <activity
+83-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:32:5-106
+84            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+84-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:32:15-79
+85            android:exported="false" />
+85-->K:\Escritorio2\TESIS\Seth\android\app\src\main\AndroidManifest.xml:32:80-104
+86
+87        <provider
+87-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-32:20
+88            android:name="expo.modules.filesystem.FileSystemFileProvider"
+88-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-74
+89            android:authorities="com.anonymous.Hermes.FileSystemFileProvider"
+89-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-74
+90            android:exported="false"
+90-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-37
+91            android:grantUriPermissions="true" >
+91-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-47
+92            <meta-data
+92-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-31:70
+93                android:name="android.support.FILE_PROVIDER_PATHS"
+93-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-67
+94                android:resource="@xml/file_system_provider_paths" />
+94-->[:expo-file-system] K:\Escritorio2\TESIS\Seth\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-67
+95        </provider>
+96
+97        <meta-data
+97-->[:expo-modules-core] K:\Escritorio2\TESIS\Seth\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:89
+98            android:name="org.unimodules.core.AppLoader#react-native-headless"
+98-->[:expo-modules-core] K:\Escritorio2\TESIS\Seth\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-79
+99            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+99-->[:expo-modules-core] K:\Escritorio2\TESIS\Seth\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-86
+100
+101        <provider
+101-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+102            android:name="androidx.startup.InitializationProvider"
+102-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+103            android:authorities="com.anonymous.Hermes.androidx-startup"
+103-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+104            android:exported="false" >
+104-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+105            <meta-data
+105-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+106                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+106-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+107                android:value="androidx.startup" />
+107-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\b6fe4da57007a43d86a66ba4c66459bd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+108            <meta-data
+108-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\bc74a39e1ea23fea00bfcf2682a93948\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+109                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+109-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\bc74a39e1ea23fea00bfcf2682a93948\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+110                android:value="androidx.startup" />
+110-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\bc74a39e1ea23fea00bfcf2682a93948\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+111        </provider>
+112    </application>
+113
+114</manifest>
